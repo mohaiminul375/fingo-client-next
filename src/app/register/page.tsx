@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { RiMenu2Fill } from 'react-icons/ri';
 import logo from "../../../public/0452a43b-ab8b-411e-88f3-2c944d19b344.webp";
 import { useForm, SubmitHandler } from "react-hook-form"
+import { useCreateUser } from './api/route';
 
 type Inputs = {
     name: string;
@@ -19,6 +20,7 @@ type Inputs = {
     userType: string;
 }
 const Register = () => {
+    const createUser = useCreateUser();
     const [userType, setUserType] = useState("")
     const {
         register,
@@ -28,6 +30,7 @@ const Register = () => {
     const onSubmit: SubmitHandler<Inputs> = (user_info) => {
         user_info.userType = userType;
         console.log(user_info)
+        createUser.mutateAsync(user_info);
 
     }
 
