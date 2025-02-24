@@ -27,10 +27,10 @@ const Register = () => {
         handleSubmit,
         formState: { errors },
     } = useForm<Inputs>()
-    const onSubmit: SubmitHandler<Inputs> = (user_info) => {
+    const onSubmit: SubmitHandler<Inputs> = async (user_info) => {
         user_info.userType = userType;
         console.log(user_info)
-        createUser.mutateAsync(user_info);
+        await createUser.mutateAsync(user_info);
 
     }
 

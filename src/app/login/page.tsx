@@ -8,8 +8,29 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { RiMenu2Fill } from 'react-icons/ri';
 import logo from "../../../public/0452a43b-ab8b-411e-88f3-2c944d19b344.webp"
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useUserLogin } from './api/route';
+type Inputs = {
+    name: string;
+    phone_number: number;
+    emailOrPhone: string;
+    PIN: number;
+    NID: string;
+    userType: string;
+}
 const Login = () => {
+    const userLogin = useUserLogin();
     const [showPassword, setShowPassword] = useState(false);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<Inputs>()
+    const onSubmit: SubmitHandler<Inputs> = async (user_info) => {
+        console.log(user_info);
+        await userLogin.mutateAsync(user_info);
+    }
+
     return (
         <section className='md:max-w-5xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-5 py-8'>
             {/* Heading */}
@@ -22,16 +43,22 @@ const Login = () => {
                     </span>
                 </div>
                 <h2 className='text-center text-3xl font-bold'>Login</h2>
+                {
+                    errors?.PIN && <p className='text-center my-4 font-bold text-red-600'>*Pin Must be 5 digit*</p>
+                }
             </div>
             {/* Form content */}
             <div className='mt-5'>
-                <form className='text-white space-y-6'>
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className='text-white space-y-6'>
                     {/* row -1 */}
                     <div className='flex flex-col justify-between gap-5'>
                         <div className="grid w-full items-center gap-1.5">
                             <Label>Email/Phone Number <span className='text-red-700 font-bold'>*</span></Label>
                             <Input type="text" placeholder="Your phone number or email address"
                                 className='text-white'
+                                {...register('emailOrPhone')}
                             />
                         </div>
                         {/* Password Field */}
@@ -44,7 +71,17 @@ const Login = () => {
                                     placeholder="Enter your 5 digit pin"
                                     className="pr-10"
                                     required
-                                // {...register('password')}
+                                    {...register("PIN", {
+                                        pattern: /^[0-9]+$/,
+                                        minLength: {
+                                            value: 5,
+                                            message: "PIN must be exactly 5 digits"
+                                        },
+                                        maxLength: {
+                                            value: 5,
+                                            message: "PIN must be exactly 5 digits"
+                                        }
+                                    })}
                                 />
                                 <Button
                                     type="button"
