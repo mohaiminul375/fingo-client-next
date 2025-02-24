@@ -1,9 +1,11 @@
+import UserMenu from "@/components/HomeMenu/UsersMenu/UserMenu";
 
 
 export default function Home() {
   return (
     <section>
-    dddddddd
+    {/* usr Menu */}
+    <UserMenu/>
     </section>
   );
 }
