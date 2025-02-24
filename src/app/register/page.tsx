@@ -1,14 +1,24 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
-
+import { RiMenu2Fill } from 'react-icons/ri';
+import logo from "../../../public/0452a43b-ab8b-411e-88f3-2c944d19b344.webp"
 const Register = () => {
     return (
         <section className='md:max-w-5xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-5 py-8'>
             {/* Heading */}
-            <div>
+            <div className='space-y-5'>
+                <div className='flex items-center justify-center'>
+                    <Image src={logo} alt="site_logo" height={50} width={50} className="rounded-full" />
+                    <span className="ml-2 text-4xl italic font-extrabold text-white hidden lg:flex items-center">
+                        FingGo
+                        <RiMenu2Fill className="text-3xl mt-2" />
+                    </span>
+                </div>
                 <h2 className='text-center text-3xl font-bold'>Register</h2>
             </div>
             {/* Form content */}
@@ -67,6 +77,9 @@ const Register = () => {
                         <Button variant='secondary'>Register</Button>
                     </div>
                 </form>
+                <div className='mt-5 text-center font-bold'>
+                    <h2> Already Have an account? <Link href='/login' className='underline text-[#d3d3d3]'>Login</Link> here</h2>
+                </div>
             </div>
         </section>
     );

@@ -19,7 +19,7 @@ export default function Navbar() {
     // console.log(user, loading)
     return (
         <header className="flex h-20 w-full items-center px-4 md:px-6 shadow-xl border-b-2 bg-popover-foreground ">
-            <Link href="/" className="flex items-center" prefetch={false}>
+            <Link href="/" className="flex items-center">
                 <Image src={logo} alt="site_logo" height={50} width={50} className="rounded-full" />
                 <span className="ml-2 text-4xl italic font-extrabold text-white hidden lg:flex items-center">
                     FingGo
