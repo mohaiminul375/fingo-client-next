@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "../../../public/0452a43b-ab8b-411e-88f3-2c944d19b344.webp"
+import logo from "../../../public/logo.png"
 import { RiMenu2Fill } from "react-icons/ri";
 const WebLogo = () => {
     return (

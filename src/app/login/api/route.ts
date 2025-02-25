@@ -1,9 +1,14 @@
+'use client'
+import { useAuth } from "@/Provider/AuthProvider"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
+import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 // Login function
 //TODO: error handle
 export const useUserLogin = () => {
+    const { setToken } = useAuth();
+    const router = useRouter();
     return useMutation({
         mutationFn: async (user_info: object) => {
             const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/login`, user_info)
@@ -16,6 +21,10 @@ export const useUserLogin = () => {
             if (data.success === true) {
                 toast.success('Registration successfully please login')
                 sessionStorage.setItem('token', data.token)
+                setToken(data?.token)
+                setTimeout(() => {
+                    router.replace('/')
+                }, 1000)
             }
         }, onError: (error) => {
             console.log(error)

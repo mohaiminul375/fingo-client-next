@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { RiMenu2Fill } from "react-icons/ri";
-import logo from "../../public/0452a43b-ab8b-411e-88f3-2c944d19b344.webp";
+import logo from "../../public/logo.png";
 
 const Loading = () => {
     return (

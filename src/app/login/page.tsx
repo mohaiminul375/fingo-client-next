@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { RiMenu2Fill } from 'react-icons/ri';
-import logo from "../../../public/0452a43b-ab8b-411e-88f3-2c944d19b344.webp"
+import logo from "../../../public/logo.png"
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useUserLogin } from './api/route';
 type Inputs = {

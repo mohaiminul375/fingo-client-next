@@ -17,7 +17,7 @@ interface UserContextType {
     loading: boolean;
     error?: string | null;
     logOut?: () => void;
-    setToken?: React.Dispatch<React.SetStateAction<string | null>>;
+    setToken: React.Dispatch<React.SetStateAction<string | null>>;
 }
 const AuthContext = createContext<UserContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -29,13 +29,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const storedToken = sessionStorage.getItem('token');
-            setToken(storedToken);
+            // setToken(storedToken);
 
             if (!storedToken) {
                 setLoading(false);
                 return;
             }
-
             const fetchUser = async () => {
                 try {
                     setLoading(true);
