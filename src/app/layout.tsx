@@ -48,6 +48,7 @@ export default function RootLayout({
           <QueryClientProvider client={queryClient}>
             <Navbar />
             <main className="max-w-5xl mx-auto md:px-0 px-2 mt-10">
+              
               {children}
             </main>
             <Toaster
