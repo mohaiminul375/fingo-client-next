@@ -9,14 +9,16 @@ import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { RiMenu2Fill } from "react-icons/ri";
+import { useAuth } from "@/Provider/AuthProvider";
 // import { useUser } from "@/AuthProvider/UserContext";
 
 
 
 export default function Navbar() {
+
     // const pathname = usePathname();
-    // const { user, logOut, loading } = useUser();
-    // console.log(user, loading)
+    const { user, logOut, loading } = useAuth();
+    console.log(user, loading)
     return (
         <header className="flex h-20 w-full items-center px-4 md:px-6 shadow-xl border-b-2 bg-popover-foreground ">
             <Link href="/" className="flex items-center">

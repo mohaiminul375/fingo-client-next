@@ -5,7 +5,7 @@ import toast from "react-hot-toast"
 export const useUserLogin = () => {
     return useMutation({
         mutationFn: async (user_info: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/login`, user_info)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/login`, user_info)
             return data
         },
         mutationKey: ['login-user'],

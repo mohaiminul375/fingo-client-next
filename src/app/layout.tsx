@@ -9,6 +9,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { AuthProvider } from "@/Provider/AuthProvider";
 
 
 
@@ -43,17 +44,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryClientProvider client={queryClient}>
-          <Navbar />
-          <main className="max-w-5xl mx-auto md:px-0 px-2 mt-10">
-            {children}
-          </main>
-          <Toaster
-            position="top-center"
-            reverseOrder={false}
-          />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
+        <AuthProvider>
+          <QueryClientProvider client={queryClient}>
+            <Navbar />
+            <main className="max-w-5xl mx-auto md:px-0 px-2 mt-10">
+              {children}
+            </main>
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </AuthProvider>
       </body>
     </html>
   );
