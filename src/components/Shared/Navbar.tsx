@@ -1,17 +1,16 @@
 'use client'
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
+// import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { NavigationMenu, NavigationMenuList, NavigationMenuLink } from "@/components/ui/navigation-menu";
+// import { NavigationMenu, NavigationMenuList, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import Image from "next/image";
 import logo from "../../../public/logo.png";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { RiMenu2Fill } from "react-icons/ri";
 import { useAuth } from "@/Provider/AuthProvider";
 // import { useUser } from "@/AuthProvider/UserContext";
-
 
 
 export default function Navbar() {
@@ -31,25 +30,18 @@ export default function Navbar() {
                     <RiMenu2Fill />
                 </span>
             </Link>
-            {/* Right Side content */}
-            <div className="ml-auto flex items-center">
-                <Link className="mx-2 text-white" href="/register">Register</Link>
-                <Link href="/login">
-                    <Button variant="destructive" className="rounded-full">Login</Button>
-                </Link>
-            </div>
             {/* Login/Register Buttons */}
-            {/* {user ? (
+            {user ? (
                 <div className="ml-auto flex items-center">
                     <DropdownMenu>
                         <DropdownMenuTrigger>
                             <Avatar>
-                                <AvatarImage src={user?.img} alt="avatar" />
+                                <AvatarImage src='https://i.ibb.co.com/RbY8vby/avatar.png' alt="avatar" />
                                 <AvatarFallback />
                             </Avatar>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
-                            <DropdownMenuLabel>{user.user_name}</DropdownMenuLabel>
+                            <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
                             <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
                             <DropdownMenuLabel onClick={logOut}>LogOut</DropdownMenuLabel>
                             <DropdownMenuSeparator />
@@ -63,7 +55,7 @@ export default function Navbar() {
                         <Button variant="default" className="rounded-full">Login</Button>
                     </Link>
                 </div>
-            )} */}
+            )}
         </header>
 
 

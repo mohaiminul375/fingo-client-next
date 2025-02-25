@@ -7,9 +7,9 @@ import { createContext } from "react";
 interface User {
     _id?: string;
     email?: string;
-    user_name?: string;
+    name?: string;
     role?: string;
-    img?: string;
+    userType?: string;
 }
 interface UserContextType {
     email?: string;

@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { RiMenu2Fill } from 'react-icons/ri';
-import logo from "../../../public/0452a43b-ab8b-411e-88f3-2c944d19b344.webp";
+import logo from "../../../public/logo.png";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { useCreateUser } from './api/route';
 
@@ -25,13 +25,14 @@ const Register = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm<Inputs>()
     const onSubmit: SubmitHandler<Inputs> = async (user_info) => {
         user_info.userType = userType;
         console.log(user_info)
         await createUser.mutateAsync(user_info);
-
+        reset()
     }
 
     // console.log(errors)
