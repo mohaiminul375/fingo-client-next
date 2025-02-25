@@ -10,6 +10,7 @@ interface User {
     name?: string;
     role?: string;
     userType?: string;
+    phone_number: string;
 }
 interface UserContextType {
     email?: string;

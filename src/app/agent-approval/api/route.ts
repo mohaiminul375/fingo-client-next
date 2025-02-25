@@ -31,7 +31,7 @@ export const useApprovedAgent = () => {
 
     return useMutation({
         mutationFn: async ({ id, newStatus }: UpdateProps) => {
-            const { data } = await axios.put(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/agent-approval-admin/${id}`, newStatus)
+            const { data } = await axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/agent-approval-admin/${id}`, newStatus)
             return data
         },
         mutationKey: ['approve-agent'],
