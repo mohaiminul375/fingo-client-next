@@ -2,9 +2,9 @@
 import Image from "next/image";
 import React from "react";
 import { RiMenu2Fill } from "react-icons/ri";
-import logo from "../../../public/0452a43b-ab8b-411e-88f3-2c944d19b344.webp";
+import logo from "../../public/0452a43b-ab8b-411e-88f3-2c944d19b344.webp";
 
-const Page = () => {
+const Loading = () => {
     return (
         <div className="min-h-[50vh] flex justify-center items-center bg-transparent">
             <span className="relative p-2 rounded-full w-fit bg-transparent">
@@ -49,4 +49,4 @@ const Page = () => {
     );
 };
 
-export default Page;
+export default Loading;

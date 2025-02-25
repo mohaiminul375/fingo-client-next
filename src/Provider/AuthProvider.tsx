@@ -1,4 +1,5 @@
 'use client'
+import Loading from "@/app/loading";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ReactNode, useContext, useEffect, useState } from "react";
@@ -70,7 +71,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
     return (
         <AuthContext.Provider value={{ user, loading, error, logOut, setToken }}>
-            {loading ? <div>loading.....</div> : error ? <div>{error}</div> : children}
+            {loading ? <div><Loading /></div> : error ? <div>{error}</div> : children}
         </AuthContext.Provider>
     );
 };
