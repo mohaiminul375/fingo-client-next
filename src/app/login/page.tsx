@@ -32,7 +32,7 @@ const Login = () => {
     }
 
     return (
-        <section className='md:max-w-5xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-5 py-8'>
+        <section className='md:max-w-3xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-5 py-8'>
             {/* Heading */}
             <div className='space-y-5'>
                 <div className='flex items-center justify-center'>
