@@ -51,7 +51,10 @@ export default function Navbar() {
                             {/* Balance & Income (Initially Hidden, Shown on Click) */}
                             <div className={`flex flex-col ml-3 transition-all duration-300 ${showBalance ? "opacity-100" : "opacity-0 w-0 overflow-hidden"}`}>
                                 <span className="text-lg font-medium">Balance: {user.current_balance} ৳</span>
-                                <span className="text-sm text-gray-600">Income: {user?.total_income} ৳</span>
+                                {
+                                    user?.userType !== 'User' && <span className="text-sm text-gray-600">Income: {user?.total_income} ৳</span>
+                                }
+
                             </div>
                         </div>
                         {/*  */}

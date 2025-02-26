@@ -9,11 +9,11 @@ import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useCompleteCashIn, useVerifyCashIn } from './api/route';
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog';
-import { DialogClose, DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader } from '@/components/ui/dialog';
+import { DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
 import cashIn from '../../../public/trx_method/cash-in.png'
 import Image from 'next/image';
-
+// TODO: cashIn error
 type Inputs = {
     name: string;
     receiver_phone_number: string;

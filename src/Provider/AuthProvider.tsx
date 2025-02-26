@@ -11,6 +11,8 @@ interface User {
     role?: string;
     userType?: string;
     phone_number: string;
+    current_balance: number | undefined;
+    total_income: number;
 }
 interface UserContextType {
     email?: string;
