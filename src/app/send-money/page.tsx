@@ -81,7 +81,7 @@ const SendMoney = () => {
     };
 
     // Handle button animation
-    const handleCompleteCashIn = async () => {
+    const handleCompleteSendMoney = async () => {
         setBtnDisabled(true)
         setIsLoading(true);
         if (!isVerified) {
@@ -93,8 +93,15 @@ const SendMoney = () => {
             setIsVerified(null)
             setBtnDisabled(false)
         }, 3000);
-        const res = await completeSendMoney.mutateAsync(isVerified);
-        console.log(res);
+        try {
+            const res = await completeSendMoney.mutateAsync(isVerified);
+            if (res?.success == true) {
+                toast.error(res?.message)
+            }
+        } catch (error) {
+            console.log(error)
+            // TODO
+        }
 
     };
     return (
@@ -224,7 +231,7 @@ const SendMoney = () => {
                             <div
                                 aria-disabled={btnDisabled} // Make sure the correct variable is used
                                 className={`relative flex items-center justify-center p-5 py-5 rounded-full bg-[#d3d3d3] mx-auto overflow-hidden ${btnDisabled && 'cursor-not-allowed opacity-50'}`}
-                                onClick={btnDisabled ? undefined : handleCompleteCashIn} // Check if the button is disabled
+                                onClick={btnDisabled ? undefined : handleCompleteSendMoney} // Check if the button is disabled
                             >
                                 {/* Rotating circle when loading */}
                                 {isLoading && (
