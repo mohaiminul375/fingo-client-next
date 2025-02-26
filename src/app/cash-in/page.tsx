@@ -8,7 +8,7 @@ import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useVerifyCashIn } from './api/route';
+import { useCompleteCashIn, useVerifyCashIn } from './api/route';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog';
 import { DialogClose, DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
 import cashIn from '../../../public/trx_method/cash-in.png'
@@ -23,13 +23,21 @@ type Inputs = {
     agent_phone_number: string | undefined;
     method: string;
 }
-
+interface VerifyObj {
+    agent_name: string;
+    agent_phone_number: string;
+    receiver_name: string;
+    receiver_phone_number: string;
+    amount: number;
+}
 const CashIn = () => {
     const [isLoading, setIsLoading] = useState(false);
     const verifyCashIn = useVerifyCashIn();
+    const completeCashIn = useCompleteCashIn();
     const { user } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
-    const [isVerified, setIsVerified] = useState(null);  // Adjusted state type
+    const [isVerified, setIsVerified] = useState<VerifyObj | null>(null);
+    const [btnDisabled, setBtnDisabled] = useState<boolean>(false)
     const {
         register,
         handleSubmit,
@@ -53,11 +61,21 @@ const CashIn = () => {
         }
     };
     // Handle button animation
-    const handleClick = () => {
+    const handleCompleteCashIn = async () => {
+        setBtnDisabled(true)
         setIsLoading(true);
+        if (!isVerified) {
+            return toast.error('failed to get data')
+        }
+
         setTimeout(() => {
             setIsLoading(false);
-        }, 3000); // Reset after animation completes
+            setIsVerified(null)
+            setBtnDisabled(false)
+        }, 3000);
+        const res = await completeCashIn.mutateAsync(isVerified);
+        console.log(res);
+
     };
     return (
         <>
@@ -144,7 +162,7 @@ const CashIn = () => {
             </section>
 
             {/* Modal Triggered After Successful Cash In */}
-            {!isVerified && (
+            {isVerified && (
                 <Dialog open={true} onOpenChange={() => setIsVerified(null)}>
                     <DialogContent className="md:max-w-xl w-full bg-popover-foreground text-white p-6 rounded-lg shadow-lg">
                         <DialogHeader className="text-center">
@@ -183,18 +201,17 @@ const CashIn = () => {
                             </div>
                         </div>
                         <DialogFooter className="mt-8 flex justify-center w-full">
-                            <DialogClose className='' asChild>
-                                <div
-                                    className="relative flex items-center justify-center p-5 py-5 rounded-full bg-[#d3d3d3] mx-auto overflow-hidden"
-                                    onClick={handleClick}
-                                >
-                                    {/* Rotating circle when loading */}
-                                    {isLoading && (
-                                        <div className="absolute inset-0 border-4 border-transparent border-t-emerald-500 rounded-full animate-spin"></div>
-                                    )}
-                                    <Image className='mx-auto' src={cashIn} alt="cashIn-icon" height={50} width={50} />
-                                </div>
-                            </DialogClose>
+                            <div
+                                aria-disabled={btnDisabled} // Make sure the correct variable is used
+                                className={`relative flex items-center justify-center p-5 py-5 rounded-full bg-[#d3d3d3] mx-auto overflow-hidden ${btnDisabled && 'cursor-not-allowed opacity-50'}`}
+                                onClick={btnDisabled ? undefined : handleCompleteCashIn} // Check if the button is disabled
+                            >
+                                {/* Rotating circle when loading */}
+                                {isLoading && (
+                                    <div className="absolute inset-0 border-4 border-transparent border-t-emerald-500 rounded-full animate-spin"></div>
+                                )}
+                                <Image className='mx-auto' src={cashIn} alt="cashIn-icon" height={50} width={50} />
+                            </div>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
