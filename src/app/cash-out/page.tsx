@@ -16,7 +16,7 @@ import Image from 'next/image';
 // TODO: cashIn error
 type Inputs = {
     name: string;
-    receiver_agent_phone_number: string;
+    agent_phone_number: string;
     PIN: string;
     trx_amount: number;
     user_name: string | undefined;
@@ -24,10 +24,10 @@ type Inputs = {
     method: string;
 }
 interface VerifyObj {
-    sender_name: string;
-    sender_phone_number: string;
-    receiver_name: string;
-    receiver_phone_number: string;
+    user_name: string;
+    user_phone_number: string;
+    agent_name: string;
+    agent_phone_number: string;
     amount: number;
     trx_charge: number;
 }
@@ -96,7 +96,7 @@ const SendMoney = () => {
         try {
             const res = await completeSendMoney.mutateAsync(isVerified);
             if (res?.success == true) {
-                toast.error(res?.message)
+                toast.success(res?.message)
             }
         } catch (error) {
             console.log(error)
@@ -131,7 +131,7 @@ const SendMoney = () => {
                                         maxLength: { value: 11, message: "Phone number must be 11 characters" }
                                     })}
                                 />
-                                {errors.receiver_phone_number && <p className="text-red-500">{errors.receiver_phone_number.message}</p>}
+                                {errors.agent_phone_number && <p className="text-red-500">{errors.agent_phone_number.message}</p>}
                             </div>
 
                             {/* Amount */}
