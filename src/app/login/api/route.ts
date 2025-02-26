@@ -1,11 +1,13 @@
 'use client'
 import { useAuth } from "@/Provider/AuthProvider"
 import { useMutation } from "@tanstack/react-query"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 // Login function
-//TODO: error handle
+interface ApiErrorResponse {
+    error?: string;
+}
 //Handle Login Authentication
 export const useUserLogin = () => {
     const { setToken } = useAuth();
@@ -30,7 +32,15 @@ export const useUserLogin = () => {
             }
         }, onError: (error) => {
             console.log(error)
-            //error.response.data.message
+            const axiosError = error as AxiosError<ApiErrorResponse>;
+            const existedError = axiosError?.response?.data?.error;
+            if (existedError) {
+                toast.error(existedError)
+            } else if (error.message) {
+                toast.error(error.message)
+            } else {
+                toast.error('failed to create account')
+            }
 
 
         },

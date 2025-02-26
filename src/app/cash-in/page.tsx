@@ -13,10 +13,11 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader } from '@/components/
 import { DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
 import cashIn from '../../../public/trx_method/cash-in.png'
 import Image from 'next/image';
+import { AxiosError } from 'axios';
 // TODO: cashIn error
 type Inputs = {
     name: string;
-    receiver_phone_number: string;
+    user_phone_number: string;
     PIN: string;
     trx_amount: number;
     agent_name: string | undefined;
@@ -26,9 +27,12 @@ type Inputs = {
 interface VerifyObj {
     agent_name: string;
     agent_phone_number: string;
-    receiver_name: string;
-    receiver_phone_number: string;
+    user_phone_number: string;
+    user_name: string;
     amount: number;
+}
+interface ApiErrorResponse {
+    message?: string;
 }
 // Cah In Page
 const CashIn = () => {
@@ -56,9 +60,19 @@ const CashIn = () => {
         cashIn.agent_phone_number = user?.phone_number;
         // Verify cash In
         const res = await verifyCashIn.mutateAsync(cashIn);
-        console.log(res);
-        if (res?.verifiedTransaction) {
-            setIsVerified(res.verifiedTransaction);  // Set the state to trigger modal
+        try {
+
+            if (res?.verifiedTransaction) {
+                setIsVerified(res.verifiedTransaction);
+            }
+        } catch (error) {
+            const axiosError = error as AxiosError<ApiErrorResponse>;
+            const existedError = axiosError?.response?.data?.message;
+            if (existedError) {
+                toast.error(existedError)
+            }
+            const netWorkError = (error as Error)?.message || "Failed Verify!"
+            toast.error(netWorkError)
         }
     };
     // Handle button animation and complete cash in
@@ -95,7 +109,7 @@ const CashIn = () => {
                             <div className="grid w-full items-center gap-1.5">
                                 <Label>Customer Phone Number <span className='text-red-700 font-bold'>*</span></Label>
                                 <Input type="tel" placeholder="Enter your phone number"
-                                    {...register("receiver_phone_number", {
+                                    {...register("user_phone_number", {
                                         required: "Phone number is required",
                                         pattern: {
                                             value: /^[0-9]+$/,
@@ -105,7 +119,7 @@ const CashIn = () => {
                                         maxLength: { value: 11, message: "Phone number must be 11 characters" }
                                     })}
                                 />
-                                {errors.receiver_phone_number && <p className="text-red-500">{errors.receiver_phone_number.message}</p>}
+                                {errors.user_phone_number && <p className="text-red-500">{errors.user_phone_number.message}</p>}
                             </div>
 
                             {/* Amount */}
@@ -174,34 +188,40 @@ const CashIn = () => {
                         </DialogHeader>
 
                         {/* Sender Information */}
-                        <div className="mt-6">
+                        <div className="mt-0">
                             <h3 className="text-lg font-semibold text-emerald-400">Sender Information</h3>
                             <div className="mt-2 space-y-2">
                                 <p className="text-base font-medium"><strong>Agent Name:</strong> {isVerified?.agent_name || 'Not Found'}</p>
                                 <p className="text-sm text-gray-300"><strong>Agent Phone:</strong> {isVerified?.agent_phone_number || 'Not Found'}</p>
                             </div>
-                            <hr className="my-4 border-gray-600" />
+                            <hr className="my-2 border-gray-600" />
                         </div>
 
                         {/* Receiver Information */}
-                        <div className="mt-6">
+                        <div className="mt-0">
                             <h3 className="text-lg font-semibold text-emerald-400">Receiver Information</h3>
                             <div className="mt-2 space-y-2">
-                                <p className="text-base font-medium"><strong>Receiver Name:</strong> {isVerified?.receiver_name || 'Not Found'}</p>
-                                <p className="text-sm text-gray-300"><strong>Receiver Phone:</strong> {isVerified?.receiver_phone_number || 'Not Found'}</p>
+                                <p className="text-base font-medium"><strong>Receiver Name:</strong> {isVerified?.user_name || 'Not Found'}</p>
+                                <p className="text-sm text-gray-300"><strong>Receiver Phone:</strong> {isVerified?.user_phone_number || 'Not Found'}</p>
                             </div>
-                            <hr className="my-4 border-gray-600" />
+                            <hr className="my-2 border-gray-600" />
                         </div>
 
                         {/* Amount Information */}
-                        <div className="mt-6">
+                        <div className="mt-0">
                             <h3 className="text-lg font-semibold text-emerald-400">Amount Information</h3>
                             <div className="mt-2 space-y-2">
                                 <p className="text-base font-medium"><strong>Amount:</strong> {isVerified?.amount || 'Not Found'} Taka</p>
                                 <p className="text-sm text-gray-300"><strong>Charge:</strong> 0 Taka</p>
+                                <p className="text-base font-medium">
+                                    <strong>Remain Balance: </strong>
+                                    {user?.current_balance !== undefined
+                                        ? user.current_balance - isVerified.amount
+                                        : 'Not Found'} Taka
+                                </p>
                             </div>
                         </div>
-                        <DialogFooter className="mt-8 flex justify-center w-full">
+                        <DialogFooter className="mt-2 flex justify-center w-full">
                             <div
                                 aria-disabled={btnDisabled}
                                 className={`relative flex items-center justify-center p-5 py-5 rounded-full bg-[#d3d3d3] mx-auto overflow-hidden ${btnDisabled && 'cursor-not-allowed opacity-50'}`}

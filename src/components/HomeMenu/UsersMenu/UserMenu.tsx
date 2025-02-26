@@ -18,10 +18,11 @@ const UserMenu = () => {
                     <Image src={cashOut} alt='send-money' height={50} width={50} />
                     <h2 className='text-lg font-semibold'>Cash Out</h2>
                 </Link>
-                <div className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground hover:shadow-none transition-all duration-300 text-center'>
+                {/* trx history */}
+                <Link href='/transaction-history-user' className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground hover:shadow-none transition-all duration-300 text-center hover:border-2 hover:border-popover-foreground'>
                     <Image src={trx_history} alt='send-money' height={50} width={50} />
                     <h2 className='text-lg font-semibold'>Transaction History</h2>
-                </div>
+                </Link>
             </div>
         </section>
     );

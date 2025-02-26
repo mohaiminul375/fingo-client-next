@@ -14,7 +14,7 @@ import { DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
 import cashIn from '../../../public/trx_method/cash-in.png'
 import Image from 'next/image';
 import { AxiosError } from 'axios';
-// TODO: cashIn error
+
 type Inputs = {
     name: string;
     agent_phone_number: string;

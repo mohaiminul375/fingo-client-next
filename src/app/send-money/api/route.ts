@@ -15,7 +15,7 @@ export const useVerifySendMoney = () => {
 export const useCompleteSendMoney = () => {
     return useMutation({
         mutationFn: async (cashIn_complete: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/complete-sendMoney`, cashIn_complete)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/complete-sendMoney`, cashIn_complete)
             return data
         },
         mutationKey: ['complete-SendMoney'],

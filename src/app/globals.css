@@ -7,7 +7,7 @@
 @layer base {
   :root {
 
-    --background: 0 0% 100%;
+    --background:0,0%,82.75%;
 
     --foreground: 0, 0%, 0%;
     /*#003e78 dark shade of blue*/
