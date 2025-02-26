@@ -8,22 +8,23 @@ interface ApiErrorResponse {
 interface ReqProp {
     agent_name: string | undefined;
     agent_number: string | undefined;
+    withdrawAmount: number | undefined;
 }
-// Send Cash request to Admin from agent
-export const useAgentCashRequest = () => {
+// Send Withdraw request to Admin from agent
+export const useAgentWithdrawRequest = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: async (newReq: ReqProp) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/request-money-agent`, newReq)
+        mutationFn: async (newWithdraw: ReqProp) => {
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/request-withdraw-agent`, newWithdraw)
             return data
         },
-        mutationKey: ['cash-request-user'],
+        mutationKey: ['withdraw-request'],
         onSuccess: (data) => {
             console.log(data)
             if (data.success === true) {
                 Swal.fire({
                     title: "Success",
-                    text: "Request send successfully please wait for approved",
+                    text: "Request withdraw successfully please wait for approved",
                     icon: "success"
                 });
                 queryClient.invalidateQueries({ queryKey: ['all-cash-request'] })

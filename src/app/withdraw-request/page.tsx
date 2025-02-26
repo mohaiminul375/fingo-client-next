@@ -3,11 +3,46 @@ import WebLogo from '@/components/Shared/WebLogo';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import { useAuth } from '@/Provider/AuthProvider';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
+import { useAgentWithdrawRequest } from './api/route';
 // With Request from agent
 const WithdrawReq = () => {
-    const [showPassword, setShowPassword] = useState(false);
+    const withdrawRequest = useAgentWithdrawRequest();
+    const { user } = useAuth();
+    const [amount, setAmount] = useState('');
+    const handleWithdraw = (e) => {
+        e.preventDefault()
+        // balance must be 100 or more and cant requst more than earn
+        const withdrawAmount = parseFloat(amount);
+        if (withdrawAmount <= 99) {
+            return toast.error('Amount must me 100 or more')
+        } else if ((user?.current_balance ?? 0) < withdrawAmount) {
+            return toast.error('Insufficient Balance');
+        }
+        console.log({ withdrawAmount })
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Still want to Withdraw!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#003E78",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const newWithdraw = {
+                    agent_name: user?.name,
+                    agent_number: user?.phone_number,
+                    withdrawAmount,
+                }
+                await withdrawRequest.mutateAsync(newWithdraw)
+
+            }
+        });
+    }
     return (
         <section className='md:max-w-3xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-8 py-8'>
             <div className='space-y-5'>
@@ -23,49 +58,13 @@ const WithdrawReq = () => {
                             <Label>Amount<span className='text-red-700 font-bold'>*</span></Label>
                             <Input type="number" placeholder="Enter amount want to cash out"
                                 className='text-white'
-                            // {...register('emailOrPhone')}
+                                onChange={(e) => setAmount(e.target.value)}
                             />
                         </div>
-                        {/* Password Field */}
-                        < div className='grid w-full items-center gap-1.5' >
-                            <Label htmlFor="password">PIN<span className='text-red-700 font-bold'>*</span></Label>
-                            <div className="relative">
-                                <Input
-                                    type={showPassword ? 'text' : 'password'}
-                                    id="password"
-                                    placeholder="Enter your 5 digit pin"
-                                    className="pr-10"
-                                    required
-                                // {...register("PIN", {
-                                //     pattern: /^[0-9]+$/,
-                                //     minLength: {
-                                //         value: 5,
-                                //         message: "PIN must be exactly 5 digits"
-                                //     },
-                                //     maxLength: {
-                                //         value: 5,
-                                //         message: "PIN must be exactly 5 digits"
-                                //     }
-                                // })}
-                                />
-                                <Button
-                                    type="button"
-                                    variant="secondary"
-                                    size="icon"
-                                    className="absolute right-0 top-0 h-full px-3 py-2"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    aria-label={showPassword ? 'Hide password' : 'Show password'}
-                                >
-                                    {showPassword ? (
-                                        <EyeOffIcon className="h-4 w-4" />
-                                    ) : (
-                                        <EyeIcon className="h-4 w-4" />
-                                    )}
-                                </Button>
-                            </div>
-                        </div >
                         <div className=''>
-                            <Button variant='secondary'>Send</Button>
+                            <Button
+                                onClick={handleWithdraw}
+                                variant='secondary'>Send</Button>
                         </div>
                     </div>
 
