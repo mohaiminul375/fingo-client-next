@@ -13,6 +13,7 @@ interface TableProps {
     idx: number;
     user: User;
 }
+// Table of Users
 const UsersTable = ({ user, idx }: TableProps) => {
     const { _id, name, phone_number, email, userType, account_status, createdAt } = user;
     // const date =new Date(createdAt).tol;

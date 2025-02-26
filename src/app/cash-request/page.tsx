@@ -5,9 +5,11 @@ import { useAuth } from "@/Provider/AuthProvider";
 import Swal from 'sweetalert2'
 import { useAgentCashRequest } from "./api/route";
 import toast from "react-hot-toast";
+// Send Cash Request to Admin
 const CashReq = () => {
     const { user } = useAuth();
     const cashRequest = useAgentCashRequest();
+    // Request Function
     const handleMoneyRequest = async () => {
         if (!user?.name && !user?.phone_number) {
             return toast.error('failed to get Agent info')

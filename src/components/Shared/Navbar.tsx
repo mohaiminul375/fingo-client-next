@@ -1,23 +1,17 @@
 'use client'
-// import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-// import { NavigationMenu, NavigationMenuList, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import Image from "next/image";
 import logo from "../../../public/logo.png";
-// import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { RiMenu2Fill } from "react-icons/ri";
 import { useAuth } from "@/Provider/AuthProvider";
 import { useState } from "react";
-// import { useUser } from "@/AuthProvider/UserContext";
 
 
 export default function Navbar() {
     const [showBalance, setShowBalance] = useState(false);
-
-    // const pathname = usePathname();
     const { user, logOut, loading } = useAuth();
     console.log(user, loading)
     return (
@@ -41,14 +35,14 @@ export default function Navbar() {
                             className="relative flex items-center m-10 h-14 rounded-full bg-white cursor-pointer px-5 transition-all duration-300"
                             onClick={() => setShowBalance(!showBalance)}
                         >
-                            {/* Taka symbol + Check Balance (Initially Visible) */}
+                            {/* Taka symbol and Check Balance (Initially Visible) */}
                             <span
                                 className={`text-lg font-medium transition-all duration-300 ${showBalance ? "opacity-0 w-0 overflow-hidden" : "opacity-100"}`}
                             >
                                 ৳ Check Balance
                             </span>
 
-                            {/* Balance & Income (Initially Hidden, Shown on Click) */}
+                            {/* Balance and Income (Initially Hidden, Shown on Click) and user Type validate*/}
                             <div className={`flex flex-col ml-3 transition-all duration-300 ${showBalance ? "opacity-100" : "opacity-0 w-0 overflow-hidden"}`}>
                                 <span className="text-lg font-medium">Balance: {user.current_balance} ৳</span>
                                 {
@@ -57,7 +51,7 @@ export default function Navbar() {
 
                             </div>
                         </div>
-                        {/*  */}
+                        {/*DropDown user  */}
                         <DropdownMenu>
                             <DropdownMenuTrigger>
                                 <Avatar>

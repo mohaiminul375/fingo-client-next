@@ -3,10 +3,9 @@ import WebLogo from '@/components/Shared/WebLogo';
 import React from 'react';
 import { usePendingAgents } from './api/route';
 import Loading from '../loading';
-// import { Table, Users } from 'lucide-react';
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import PendingAgentsTable from '@/components/Admin/PendingAgentsTable';
-
+// Agent Approval List
 const AgentApproval = () => {
     const { data: agents, isPending, error, isError } = usePendingAgents();
     if (isPending) {
@@ -28,7 +27,7 @@ const AgentApproval = () => {
                     Agents are waiting for approval and start business.
                 </p>
             </div>
-            {/* filter */}
+            {/* TODO:filter */}
             <div>
 
             </div>

@@ -18,6 +18,7 @@ type Inputs = {
     NID: string;
     userType: string;
 }
+// Login Page
 const Login = () => {
     const userLogin = useUserLogin();
     const [showPassword, setShowPassword] = useState(false);
@@ -61,7 +62,7 @@ const Login = () => {
                                 {...register('emailOrPhone')}
                             />
                         </div>
-                        {/* Password Field */}
+                        {/* PIN Field */}
                         < div className='grid w-full items-center gap-1.5' >
                             <Label htmlFor="password">PIN<span className='text-red-700 font-bold'>*</span></Label>
                             <div className="relative">
@@ -105,6 +106,7 @@ const Login = () => {
                         <Button variant='secondary'>Login</Button>
                     </div>
                 </form>
+                {/* redirect to register */}
                 <div className='mt-5 text-center font-bold'>
                     <h2>New in FingGo? <Link href='/register' className='underline text-[#d3d3d3]'>Register</Link> here</h2>
                 </div>

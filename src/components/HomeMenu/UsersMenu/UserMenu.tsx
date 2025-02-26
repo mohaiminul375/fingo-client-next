@@ -4,6 +4,7 @@ import send_money from '../../../../public/trx_method/send-money.png';
 import cashOut from '../../../../public/trx_method/cash-out.png';
 import trx_history from '../../../../public/trx_method/transaction-history.png';
 import Link from 'next/link';
+//menu for User
 const UserMenu = () => {
     return (
         <section className='md:max-w-2xl mx-auto'>

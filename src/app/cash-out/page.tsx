@@ -31,7 +31,8 @@ interface VerifyObj {
     amount: number;
     trx_charge: number;
 }
-const SendMoney = () => {
+// CashOut page
+const CashOut = () => {
     const [isLoading, setIsLoading] = useState(false);
     const verifySendMoney = useVerifyCashOut();
     const completeSendMoney = useCompleteCashOut();
@@ -63,10 +64,7 @@ const SendMoney = () => {
         cashOut.method = 'cashOut';
         cashOut.user_name = user?.name;
         cashOut.user_phone_number = user?.phone_number;
-
-        console.log(cashOut);
-
-        // Proceed with the transaction using the mutateAsync method
+        // Verify cash out
         try {
             const res = await verifySendMoney.mutateAsync(cashOut);
             console.log(res);
@@ -80,7 +78,7 @@ const SendMoney = () => {
         }
     };
 
-    // Handle button animation
+    // Handle button animation and complete cash out
     const handleCompleteSendMoney = async () => {
         setBtnDisabled(true)
         setIsLoading(true);
@@ -229,9 +227,9 @@ const SendMoney = () => {
                         </div>
                         <DialogFooter className="mt-2 flex justify-center w-full">
                             <div
-                                aria-disabled={btnDisabled} // Make sure the correct variable is used
+                                aria-disabled={btnDisabled}
                                 className={`relative flex items-center justify-center p-5 py-5 rounded-full bg-[#d3d3d3] mx-auto overflow-hidden ${btnDisabled && 'cursor-not-allowed opacity-50'}`}
-                                onClick={btnDisabled ? undefined : handleCompleteSendMoney} // Check if the button is disabled
+                                onClick={btnDisabled ? undefined : handleCompleteSendMoney}
                             >
                                 {/* Rotating circle when loading */}
                                 {isLoading && (
@@ -243,10 +241,8 @@ const SendMoney = () => {
                     </DialogContent>
                 </Dialog>
             )}
-
-
         </>
     );
 };
 
-export default SendMoney;
+export default CashOut;

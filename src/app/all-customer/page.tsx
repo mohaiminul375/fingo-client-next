@@ -5,7 +5,7 @@ import { useGetAllUsers } from "./api/route";
 import Loading from "../loading";
 import UsersTable from "@/components/Admin/UsersTable";
 
-
+// All Users List
 const AllCustomer = () => {
     const { data: users = [], isPending, error, isError } = useGetAllUsers();
     if (isPending) {
@@ -26,7 +26,7 @@ const AllCustomer = () => {
                     See all customers of Fingo-MFS
                 </p>
             </div>
-            {/* filter */}
+            {/* TODO:filter */}
             <div>
 
             </div>

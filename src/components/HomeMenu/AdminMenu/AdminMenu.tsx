@@ -6,6 +6,7 @@ import trx_history from '../../../../public/trx_method/transaction-history.png';
 import usersAvatar from "../../../../public/trx_method/group.png"
 import agent_approval from "../../../../public/trx_method/approval.png"
 import Link from 'next/link';
+// Menu for Admin
 const AdminMenu = () => {
     return (
         <section className='md:max-w-5xl mx-auto'>

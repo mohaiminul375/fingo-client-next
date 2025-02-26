@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 interface ApiErrorResponse {
     message?: string;
 }
+// Register a new user
 export const useCreateUser = () => {
     const queryClient = useQueryClient();
     return useMutation({

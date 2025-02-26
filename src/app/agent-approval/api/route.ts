@@ -16,6 +16,7 @@ interface UpdateProps {
     id: string,
     newStatus: object,
 }
+// List of Pending Status Agents
 export const usePendingAgents = () => {
     const { data, isPending, isError, error } = useQuery<PendingAgents[]>({
         queryFn: async () => {
@@ -26,10 +27,9 @@ export const usePendingAgents = () => {
     })
     return { data, isPending, isError, error }
 }
-
+// Approve Agent to Active
 export const useApprovedAgent = () => {
     const queryClient = useQueryClient()
-
     return useMutation({
         mutationFn: async ({ id, newStatus }: UpdateProps) => {
             const { data } = await axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/agent-approval-admin/${id}`, newStatus)
@@ -37,8 +37,6 @@ export const useApprovedAgent = () => {
         },
         mutationKey: ['approve-agent'],
         onSuccess: (data) => {
-
-            console.log(data)
             if (data.modifiedCount > 0) {
                 toast.success('Approved successfully')
                 queryClient.invalidateQueries({ queryKey: ['all-pending-agents'] })

@@ -31,6 +31,7 @@ interface VerifyObj {
     amount: number;
     trx_charge: number;
 }
+// Send Money Page
 const SendMoney = () => {
     const [isLoading, setIsLoading] = useState(false);
     const verifySendMoney = useVerifySendMoney();
@@ -49,7 +50,7 @@ const SendMoney = () => {
 
     const onSubmit: SubmitHandler<Inputs> = async (sendMoney) => {
         let userBalance = sendMoney.trx_amount;
-
+        // TS validation
         if (typeof sendMoney.trx_amount === 'string') {
             userBalance = parseFloat(sendMoney.trx_amount);
         }
@@ -59,14 +60,11 @@ const SendMoney = () => {
         if (!user?.name || !user?.phone_number) {
             return toast.error('Agent name and phone number not found');
         }
-
         sendMoney.method = 'sendMoney';
         sendMoney.sender_name = user?.name;
         sendMoney.sender_phone_number = user?.phone_number;
 
-        console.log(sendMoney);
-
-        // Proceed with the transaction using the mutateAsync method
+        // Verified send money method
         try {
             const res = await verifySendMoney.mutateAsync(sendMoney);
             console.log(res);
@@ -80,7 +78,7 @@ const SendMoney = () => {
         }
     };
 
-    // Handle button animation
+    // Handle button animation and complete send money
     const handleCompleteSendMoney = async () => {
         setBtnDisabled(true)
         setIsLoading(true);
@@ -229,9 +227,9 @@ const SendMoney = () => {
                         </div>
                         <DialogFooter className="mt-2 flex justify-center w-full">
                             <div
-                                aria-disabled={btnDisabled} // Make sure the correct variable is used
+                                aria-disabled={btnDisabled}
                                 className={`relative flex items-center justify-center p-5 py-5 rounded-full bg-[#d3d3d3] mx-auto overflow-hidden ${btnDisabled && 'cursor-not-allowed opacity-50'}`}
-                                onClick={btnDisabled ? undefined : handleCompleteSendMoney} // Check if the button is disabled
+                                onClick={btnDisabled ? undefined : handleCompleteSendMoney}
                             >
                                 {/* Rotating circle when loading */}
                                 {isLoading && (

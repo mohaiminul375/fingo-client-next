@@ -15,15 +15,17 @@ interface TableProps {
     idx: number;
     agent: Agent;
 }
+// Table row of Pending Agents table
 const PendingAgentsTable = ({ agent, idx }: TableProps) => {
     const approveAgent = useApprovedAgent();
     const { _id, name, phone_number, email, userType, account_status, createdAt } = agent;
+    // Handle function of Approve agent
     const handleApproveAgent = async (id: string) => {
         const newStatus = { account_status: 'Active' }
         await approveAgent.mutateAsync({ id, newStatus })
 
     }
-    // const date =new Date(createdAt).tol;
+    //   row of table
     return (
         <TableRow className='text-center'>
             <TableCell>{idx + 1}</TableCell>

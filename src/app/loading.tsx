@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { RiMenu2Fill } from "react-icons/ri";
 import logo from "../../public/logo.png";
-
+// Custom loading
 const Loading = () => {
     return (
         <div className="min-h-[50vh] flex justify-center items-center bg-transparent">

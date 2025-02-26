@@ -13,6 +13,7 @@ interface TableProps {
     idx: number;
     agent: User;
 }
+// Table of pending cash request admin page
 const CashRequestTable = ({ agent, idx }: TableProps) => {
     const { _id, agent_name, agent_phone_number, request_amount, status, requestedAt } = agent;
     // const date =new Date(createdAt).tol;

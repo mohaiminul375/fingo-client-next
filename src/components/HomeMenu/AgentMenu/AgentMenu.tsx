@@ -5,6 +5,7 @@ import cashReq from '../../../../public/trx_method/cash-req.png';
 import withdrawReq from '../../../../public/trx_method/cash-withdrawal.png';
 import trx_history from '../../../../public/trx_method/transaction-history.png';
 import Link from 'next/link';
+// Menu for agent
 const AgentMenu = () => {
     return (
         <section className='md:max-w-2xl mx-auto'>

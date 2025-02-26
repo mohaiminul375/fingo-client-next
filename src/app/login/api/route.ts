@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 // Login function
 //TODO: error handle
+//Handle Login Authentication
 export const useUserLogin = () => {
     const { setToken } = useAuth();
     const router = useRouter();
@@ -20,6 +21,7 @@ export const useUserLogin = () => {
             console.log(data)
             if (data.success === true) {
                 toast.success('Registration successfully please login')
+                // Set token to SS and update to call context API
                 sessionStorage.setItem('token', data.token)
                 setToken(data?.token)
                 setTimeout(() => {

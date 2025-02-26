@@ -19,6 +19,7 @@ type Inputs = {
     NID: string;
     userType: string;
 }
+// Register page
 const Register = () => {
     const createUser = useCreateUser();
     const [userType, setUserType] = useState("")
@@ -35,7 +36,7 @@ const Register = () => {
         reset()
     }
 
-    // console.log(errors)
+
     return (
         <section className='md:max-w-5xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-5 py-8'>
             {/* Heading */}

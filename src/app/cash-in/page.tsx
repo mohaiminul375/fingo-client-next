@@ -30,6 +30,7 @@ interface VerifyObj {
     receiver_phone_number: string;
     amount: number;
 }
+// Cah In Page
 const CashIn = () => {
     const [isLoading, setIsLoading] = useState(false);
     const verifyCashIn = useVerifyCashIn();
@@ -53,14 +54,14 @@ const CashIn = () => {
         cashIn.method = 'cashIn';
         cashIn.agent_name = user?.name;
         cashIn.agent_phone_number = user?.phone_number;
-        console.log(cashIn);
+        // Verify cash In
         const res = await verifyCashIn.mutateAsync(cashIn);
         console.log(res);
         if (res?.verifiedTransaction) {
             setIsVerified(res.verifiedTransaction);  // Set the state to trigger modal
         }
     };
-    // Handle button animation
+    // Handle button animation and complete cash in
     const handleCompleteCashIn = async () => {
         setBtnDisabled(true)
         setIsLoading(true);
@@ -202,9 +203,9 @@ const CashIn = () => {
                         </div>
                         <DialogFooter className="mt-8 flex justify-center w-full">
                             <div
-                                aria-disabled={btnDisabled} // Make sure the correct variable is used
+                                aria-disabled={btnDisabled}
                                 className={`relative flex items-center justify-center p-5 py-5 rounded-full bg-[#d3d3d3] mx-auto overflow-hidden ${btnDisabled && 'cursor-not-allowed opacity-50'}`}
-                                onClick={btnDisabled ? undefined : handleCompleteCashIn} // Check if the button is disabled
+                                onClick={btnDisabled ? undefined : handleCompleteCashIn}
                             >
                                 {/* Rotating circle when loading */}
                                 {isLoading && (
@@ -216,8 +217,6 @@ const CashIn = () => {
                     </DialogContent>
                 </Dialog>
             )}
-
-
         </>
     );
 };

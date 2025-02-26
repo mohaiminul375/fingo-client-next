@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setLoading(false);
                 return;
             }
+            // Fetch user for stay logged in
             const fetchUser = async () => {
                 try {
                     setLoading(true);
@@ -78,7 +79,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     );
 };
 
-// Custom hook to access the context
+// Custom hook to access the context to all over site
 export const useAuth = (): UserContextType => {
     const context = useContext(AuthContext);
     if (!context) {

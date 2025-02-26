@@ -10,6 +10,7 @@ interface Users {
     account_status: string;
     createdAt: string;
 }
+// Get All Users
 export const useGetAllUsers = () => {
     const { data, isPending, isError, error } = useQuery<Users[]>({
         queryFn: async () => {

@@ -5,8 +5,8 @@ import { usePendingCashReq } from "./api/route";
 import Loading from "../loading";
 import CashRequestTable from "@/components/Admin/PendingCashReques";
 
-
-const AllCustomer = () => {
+// Pending Cash Req list
+const PendingCashReq = () => {
     const { data: agents = [], isPending, error, isError } = usePendingCashReq();
     if (isPending) {
         return <Loading />
@@ -67,4 +67,4 @@ const AllCustomer = () => {
     );
 };
 
-export default AllCustomer;
+export default PendingCashReq;
