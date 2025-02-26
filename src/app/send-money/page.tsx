@@ -13,7 +13,8 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader } from '@/components/
 import { DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
 import cashIn from '../../../public/trx_method/cash-in.png'
 import Image from 'next/image';
-// TODO: cashIn error
+import { AxiosError } from 'axios';
+
 type Inputs = {
     name: string;
     receiver_phone_number: string;
@@ -31,6 +32,10 @@ interface VerifyObj {
     amount: number;
     trx_charge: number;
 }
+interface ApiErrorResponse {
+    message: string;
+}
+
 // Send Money Page
 const SendMoney = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -72,9 +77,15 @@ const SendMoney = () => {
                 setIsVerified(res.verifiedTransaction);  // Set the state to trigger modal
             }
         } catch (error) {
-            if (error?.response?.data.error) {
-                toast.error(error?.response?.data.error)
+            const axiosError = error as AxiosError<ApiErrorResponse>;
+            const existedError = axiosError?.response?.data?.message;
+            if (existedError) {
+                toast.error(existedError)
             }
+            const netWorkError = (error as Error)?.message || "Failed Verification!"
+            toast.error(netWorkError)
+
+
         }
     };
 
@@ -97,8 +108,14 @@ const SendMoney = () => {
                 toast.error(res?.message)
             }
         } catch (error) {
-            console.log(error)
-            // TODO
+            const axiosError = error as AxiosError<ApiErrorResponse>;
+            const existedError = axiosError?.response?.data?.message;
+            if (existedError) {
+                toast.error(existedError)
+            }
+            const netWorkError = (error as Error)?.message || "Failed send money!"
+            toast.error(netWorkError)
+
         }
 
     };
@@ -223,6 +240,13 @@ const SendMoney = () => {
                             <div className="mt-2 space-y-2">
                                 <p className="text-base font-medium"><strong>Amount:</strong> {isVerified?.amount || 'Not Found'} Taka</p>
                                 <p className="text-sm text-gray-300"><strong>Charge:</strong> {isVerified?.trx_charge || 0} Taka</p>
+                                <p className="text-base font-medium">
+                                    <strong>Remain Balance: </strong>
+                                    {user?.current_balance !== undefined
+                                        ? user.current_balance - isVerified.amount - isVerified.trx_charge
+                                        : 'Not Found'} Taka
+                                </p>
+
                             </div>
                         </div>
                         <DialogFooter className="mt-2 flex justify-center w-full">
