@@ -1,3 +1,4 @@
+'use client'
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -8,7 +9,7 @@ interface PendingAgents {
     phone_number: string,
     email: string,
     userType: string,
-    account_status: string;
+    account_status: string | undefined;
     createdAt: string;
 }
 interface UpdateProps {

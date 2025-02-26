@@ -8,7 +8,7 @@ interface Agent {
     phone_number: string,
     email: string,
     userType: string,
-    account_status: string;
+    account_status: string | undefined;
     createdAt: string;
 }
 interface TableProps {

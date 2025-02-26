@@ -8,7 +8,7 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components
 import PendingAgentsTable from '@/components/Admin/PendingAgentsTable';
 
 const AgentApproval = () => {
-    const { data: agents = [], isPending, error, isError } = usePendingAgents();
+    const { data: agents, isPending, error, isError } = usePendingAgents();
     if (isPending) {
         return <Loading />
     }

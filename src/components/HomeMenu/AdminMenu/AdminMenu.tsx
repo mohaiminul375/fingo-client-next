@@ -19,7 +19,7 @@ const AdminMenu = () => {
                     <Image src={agent_approval} alt='send-money' height={50} width={50} />
                     <h2 className='text-lg font-semibold'>Agent Approval</h2>
                 </Link>
-                <Link href='/cash-request' className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground  hover:shadow-none transition-all duration-300 text-center hover:border-2 hover:border-popover-foreground'>
+                <Link href='/pending-cash-request' className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground  hover:shadow-none transition-all duration-300 text-center hover:border-2 hover:border-popover-foreground'>
                     <Image src={cashReq} alt='send-money' height={50} width={50} />
                     <h2 className='text-lg font-semibold'>Cash Request</h2>
                 </Link>
