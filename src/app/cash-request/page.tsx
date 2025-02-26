@@ -1,7 +1,38 @@
+'use client'
 import WebLogo from "@/components/Shared/WebLogo";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/Provider/AuthProvider";
+import Swal from 'sweetalert2'
+import { useAgentCashRequest } from "./api/route";
+import toast from "react-hot-toast";
+const CashReq = () => {
+    const { user } = useAuth();
+    const cashRequest = useAgentCashRequest();
+    const handleMoneyRequest = async () => {
+        if (!user?.name && !user?.phone_number) {
+            return toast.error('failed to get Agent info')
+        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Still want to send Request!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#003E78",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const newReq = {
+                    agent_name: user?.name,
+                    agent_number: user?.phone_number
+                }
+                await cashRequest.mutateAsync(newReq)
 
-const cashReq = () => {
+            }
+        });
+
+    }
+
     return (
         <section className='md:max-w-3xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-8 py-8'>
             <div className='space-y-5'>
@@ -16,7 +47,9 @@ const cashReq = () => {
                 </p>
                 <div>
                     <div className=''>
-                        <Button variant='secondary'>Send Cash Request</Button>
+                        <Button
+                            onClick={handleMoneyRequest}
+                            variant='secondary'>Send Cash Request</Button>
                     </div>
                 </div>
             </div>
@@ -25,4 +58,4 @@ const cashReq = () => {
     );
 };
 
-export default cashReq;
+export default CashReq;
