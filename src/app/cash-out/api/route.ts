@@ -1,17 +1,17 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 
-export const useVerifySendMoney = () => {
+export const useVerifyCashOut = () => {
     return useMutation({
         mutationFn: async (cashIn_Verify: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/verify-sendMoney`, cashIn_Verify)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/verify-cashOut`, cashIn_Verify)
             return data
         },
         mutationKey: ['verify-sendMoney'],
 
     })
 }
-export const useCompleteSendMoney = () => {
+export const useCompleteCashOut = () => {
 
     return useMutation({
         mutationFn: async (cashIn_complete: object) => {

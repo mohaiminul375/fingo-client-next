@@ -5,7 +5,7 @@ export const useVerifyCashIn = () => {
 
     return useMutation({
         mutationFn: async (cashIn_Verify: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/verify-cashIn`, cashIn_Verify)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/verify-cashOut`, cashIn_Verify)
             return data
         },
         mutationKey: ['verify-cashIn'],
@@ -16,7 +16,7 @@ export const useCompleteCashIn = () => {
 
     return useMutation({
         mutationFn: async (cashIn_complete: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/complete-cashIn`, cashIn_complete)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/complete-cashOut`, cashIn_complete)
             return data
         },
         mutationKey: ['complete-cashIn'],

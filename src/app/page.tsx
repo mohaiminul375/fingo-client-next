@@ -7,6 +7,15 @@ import UserMenu from "@/components/HomeMenu/UsersMenu/UserMenu";
 import { useAuth } from "@/Provider/AuthProvider";
 import Loading from "./loading";
 
+// export default function Home() {
+  
+//   return <>
+//   <UserMenu />; 
+//   {/* <UserMenu />;  */}
+//   {/* <UserMenu />;  */}
+  
+//   </>
+// }
 export default function Home() {
   const router = useRouter();
   const { user, loading } = useAuth();

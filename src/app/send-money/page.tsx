@@ -120,7 +120,7 @@ const SendMoney = () => {
                             {/* Phone Number */}
                             <div className="grid w-full items-center gap-1.5">
                                 <Label>Receiver Phone Number <span className='text-red-700 font-bold'>*</span></Label>
-                                <Input type="tel" placeholder="Enter your phone number"
+                                <Input type="tel" placeholder="Enter receiver phone number"
                                     {...register("receiver_phone_number", {
                                         required: "Phone number is required",
                                         pattern: {
@@ -137,7 +137,7 @@ const SendMoney = () => {
                             {/* Amount */}
                             <div className="grid w-full items-center gap-1.5">
                                 <Label>Amount <span className='text-red-700 font-bold'>*</span></Label>
-                                <Input type="number" placeholder="Enter amount to cash in"
+                                <Input type="number" placeholder="Enter amount to send"
                                     {...register('trx_amount', {
                                         required: "Amount is required",
                                         min: { value: 50, message: "Amount must be greater than 50" }
