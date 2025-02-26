@@ -23,7 +23,7 @@ const AgentMenu = () => {
                     <Image src={withdrawReq} alt='send-money' height={50} width={50} />
                     <h2 className='text-lg font-semibold'>Withdraw Request</h2>
                 </Link>
-                <Link href='/transaction-history' className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground  hover:shadow-none transition-all duration-300 text-center hover:border-2 hover:border-popover-foreground'>
+                <Link href='/transaction-history-agent' className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground  hover:shadow-none transition-all duration-300 text-center hover:border-2 hover:border-popover-foreground'>
                     <Image src={trx_history} alt='send-money' height={50} width={50} />
                     <h2 className='text-lg font-semibold'>Transaction History</h2>
                 </Link>
