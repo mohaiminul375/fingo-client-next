@@ -2,36 +2,38 @@ import React from 'react';
 import { TableCell, TableRow } from '../ui/table';
 interface User {
     _id: string,
-    name: string,
-    phone_number: string,
-    email: string,
-    userType: string,
+    agent_name: string,
+    agent_phone_number: string,
+    request_amount: number,
+    status: string,
     account_status: string;
-    createdAt: string;
+    requestedAt: string;
 }
 interface TableProps {
     idx: number;
     agent: User;
 }
 const CashRequestTable = ({ agent, idx }: TableProps) => {
-    const { _id, name, phone_number, email, userType, account_status, createdAt } = agent;
+    const { _id, agent_name, agent_phone_number, request_amount, status, requestedAt } = agent;
     // const date =new Date(createdAt).tol;
     return (
         <TableRow className='text-center'>
             <TableCell>{idx + 1}</TableCell>
+            <TableCell>{_id}</TableCell>
             <TableCell className="font-medium">
-                {_id} <br />{name}
+                {agent_phone_number} <br />{agent_name}
             </TableCell>
             <TableCell>
-                {phone_number} <br />{email}
+                {status}
             </TableCell>
             <TableCell>
-                {userType} <br />{account_status}
+                {new Date(requestedAt).toLocaleString()}
             </TableCell>
             <TableCell>
-                {new Date(createdAt).toLocaleString()}
+                {request_amount}
             </TableCell>
             <TableCell>
+
             </TableCell>
             {/* <TableCell className="text-right">
                 <div className="flex justify-end gap-2">

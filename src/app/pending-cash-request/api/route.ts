@@ -1,7 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 interface CashReq {
-    _id: string;
+    _id: string,
+    agent_name: string,
+    agent_phone_number: string,
+    request_amount: number,
+    status: string,
+    account_status: string;
+    requestedAt: string;
 }
 export const usePendingCashReq = () => {
     const { data, isPending, isError, error } = useQuery<CashReq[]>({
@@ -9,7 +15,7 @@ export const usePendingCashReq = () => {
             const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cashRequest-agent`)
             return data;
         },
-        queryKey: ['all-cas']
+        queryKey: ['all-cash-request']
     })
     return { data, isPending, isError, error }
 }
