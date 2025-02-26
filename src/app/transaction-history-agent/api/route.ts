@@ -12,6 +12,8 @@ interface TrxProp {
     receiver_phone_number: string;
     agent_phone_number: string;
     phone_number: string;
+    user_name: string;
+    user_phone_number: string;
     amount: number;
 }
 interface queryProps {

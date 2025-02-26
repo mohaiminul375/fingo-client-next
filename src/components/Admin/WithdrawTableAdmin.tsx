@@ -2,7 +2,7 @@ import React from 'react';
 import { TableCell, TableRow } from '../ui/table';
 import { Button } from '../ui/button';
 import Swal from 'sweetalert2';
-import { useApproveCashReq } from '@/app/pending-cash-request/api/route';
+import { useApproveWithdraw } from '@/app/pending-cash-request/api/route';
 interface User {
     _id: string,
     agent_name: string,
@@ -17,8 +17,8 @@ interface TableProps {
     agent: User;
 }
 // Table of pending cash request admin page
-const CashRequestTable = ({ agent, idx }: TableProps) => {
-    const approveReq = useApproveCashReq();
+const WithdrawTable = ({ agent, idx }: TableProps) => {
+    const approveReq = useApproveWithdraw();
     const { _id, agent_name, agent_phone_number, request_amount, status, requestedAt } = agent;
     // const date =new Date(createdAt).tol;
     // handle cash request approved
@@ -64,4 +64,4 @@ const CashRequestTable = ({ agent, idx }: TableProps) => {
     );
 };
 
-export default CashRequestTable;
+export default WithdrawTable;
