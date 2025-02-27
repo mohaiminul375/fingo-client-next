@@ -41,20 +41,27 @@ const UserTrxHistory = () => {
                             <p className="text-sm">{new Date(trx.createdAt).toLocaleString()}</p>
                             <p className="font-semibold">{trx.method}</p>
                             {
-                                trx.method === 'cashOut' && <p>{trx.agent_name} ({trx.agent_phone_number})</p>
+                                trx.method === 'user_send_money' && <p>{trx.receiver_name} ({trx.receiver_phone_number})</p>
                             }
                             {
-                                trx.method === 'cashIn' && <p>{trx.agent_name} ({trx.agent_phone_number})</p>
+                                trx.method === 'user_received_money' && <p>{trx.sender_name} ({trx.sender_phone_number})</p>
                             }
                             {
-                                trx.method === 'sendMoney' && <p>{trx.receiver_name} ({trx.receiver_phone_number})</p>
+                                trx.method === 'Agent_cash_in' && <p>{trx.agent_name} ({trx.agent_phone_number})</p>
                             }
                             {
-                                trx.method === 'New_user_bonus' && <p>{trx.sender_name} ({trx.sender_phone_number})</p>
+                                trx.method === 'Agent_Cash_Out' && <p>{trx.agent_name} ({trx.agent_phone_number})</p>
                             }
-                            {/* <p className="text-sm">{trx.sender_name || trx.receiver_name || trx.agent_name} ({trx.sender_phone_number || trx.receiver_phone_number || trx.agent_phone_number})</p> */}
+                            {
+                                trx.method === 'New_user_bonus_receive' && <p>{trx.sender_name} ({trx.sender_phone_number})</p>
+                            }
+                       
                         </div>
-                        <p className="font-semibold text-green-400">{trx.amount} Taka</p>
+                        <p className={`font-semibold ${["user_received_money", "Agent_cash_in", "New_user_bonus_receive"].includes(trx.method) ? "text-green-400" : "text-red-400"}`}>
+                            {["user_received_money", "Agent_cash_in", "New_user_bonus_receive"].includes(trx.method) ? "+" : "-"} {trx.amount} Taka
+                        </p>
+
+
                     </div>
                 ))}
             </div>
