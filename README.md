@@ -80,7 +80,7 @@
 - react hot toast
 - sweet alert 2
 - axios
-
+ ***I have tried my best to implement the features within the available time. If I had more time, I would add more features.***
 # Server Side
 
 - https://github.com/mohaiminul375/fingo-server
