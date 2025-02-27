@@ -88,8 +88,21 @@ const CashIn = () => {
             setIsVerified(null)
             setBtnDisabled(false)
         }, 3000);
-        const res = await completeCashIn.mutateAsync(isVerified);
-        console.log(res);
+        try {
+            const res = await completeCashIn.mutateAsync(isVerified);
+            if (res?.success == true) {
+                toast.success(res?.message)
+            }
+        } catch (error) {
+            const axiosError = error as AxiosError<ApiErrorResponse>;
+            const existedError = axiosError?.response?.data?.message;
+            if (existedError) {
+                toast.error(existedError)
+            }
+            const netWorkError = (error as Error)?.message || "Failed send money!"
+            toast.error(netWorkError)
+
+        }
 
     };
     return (

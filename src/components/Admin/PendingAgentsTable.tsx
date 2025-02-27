@@ -2,6 +2,7 @@ import React from 'react';
 import { TableCell, TableRow } from '../ui/table';
 import { Button } from '../ui/button';
 import { useApprovedAgent } from '@/app/agent-approval/api/route';
+import Swal from 'sweetalert2';
 interface Agent {
     _id: string,
     name: string,
@@ -22,7 +23,20 @@ const PendingAgentsTable = ({ agent, idx }: TableProps) => {
     // Handle function of Approve agent
     const handleApproveAgent = async (id: string) => {
         const newStatus = { account_status: 'Active' }
-        await approveAgent.mutateAsync({ id, newStatus })
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Still want to Withdraw!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#003E78",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await approveAgent.mutateAsync({ id, newStatus })
+            }
+        });
+
 
     }
     //   row of table

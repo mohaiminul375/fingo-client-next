@@ -27,7 +27,7 @@ export const useApproveWithdraw = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (cash_Req: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/approve-withdraw-cashRequest`, cash_Req)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/approve-withdraw-cashRequest`, cash_Req)
             return data
         },
         mutationKey: ['approve-cash-request'],

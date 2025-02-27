@@ -33,7 +33,7 @@ interface VerifyObj {
     trx_charge: number;
 }
 interface ApiErrorResponse {
-    message: string;
+    error: string;
 }
 
 // Send Money Page
@@ -59,7 +59,7 @@ const SendMoney = () => {
         if (typeof sendMoney.trx_amount === 'string') {
             userBalance = parseFloat(sendMoney.trx_amount);
         }
-        if (user && user.current_balance !== undefined && user?.current_balance <= userBalance) {
+        if (user && user.current_balance !== undefined && (user?.current_balance - 10) <= userBalance) {
             return toast.error('Insufficient Balance');
         }
         if (!user?.name || !user?.phone_number) {
@@ -78,7 +78,7 @@ const SendMoney = () => {
             }
         } catch (error) {
             const axiosError = error as AxiosError<ApiErrorResponse>;
-            const existedError = axiosError?.response?.data?.message;
+            const existedError = axiosError?.response?.data?.error;
             if (existedError) {
                 toast.error(existedError)
             }
@@ -105,11 +105,11 @@ const SendMoney = () => {
         try {
             const res = await completeSendMoney.mutateAsync(isVerified);
             if (res?.success == true) {
-                toast.error(res?.message)
+                toast.success(res?.message)
             }
         } catch (error) {
             const axiosError = error as AxiosError<ApiErrorResponse>;
-            const existedError = axiosError?.response?.data?.message;
+            const existedError = axiosError?.response?.data?.error;
             if (existedError) {
                 toast.error(existedError)
             }
@@ -195,7 +195,7 @@ const SendMoney = () => {
                             {/* Submit Button */}
                             <div className=''>
                                 <Button variant='secondary' type="submit" disabled={!isValid}>
-                                    Cash In
+                                Send Money
                                 </Button>
                             </div>
                         </div>

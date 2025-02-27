@@ -2,6 +2,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 interface PendingAgents {
     _id: string,
@@ -38,6 +39,11 @@ export const useApprovedAgent = () => {
         mutationKey: ['approve-agent'],
         onSuccess: (data) => {
             if (data.modifiedCount > 0) {
+                Swal.fire({
+                    title: "Success",
+                    text: "Request Approved",
+                    icon: "success"
+                });
                 toast.success('Approved successfully')
                 queryClient.invalidateQueries({ queryKey: ['all-pending-agents'] })
                 queryClient.invalidateQueries({ queryKey: ['all-users'] })

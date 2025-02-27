@@ -8,12 +8,12 @@ import { useAuth } from "@/Provider/AuthProvider";
 import Loading from "./loading";
 
 // export default function Home() {
-  
+
 //   return <>
 //   <UserMenu />; 
 //   {/* <UserMenu />;  */}
 //   {/* <UserMenu />;  */}
-  
+
 //   </>
 // }
 export default function Home() {
@@ -25,21 +25,24 @@ export default function Home() {
     if (!loading && !user) {
       router.push('/login');
     }
-  }, [user, loading, router]); 
+  }, [user, loading, router]);
 
   if (loading) {
     return <Loading />;
   }
-  
+
   if (!user) {
-    return null; 
+    return null;
   }
 
   if (user?.userType === 'Admin') {
     return <AdminMenu />;
   }
   if (user?.userType === 'Agent') {
+    if (user?.account_status !== 'Active') {
+      return <h1 className="text-3xl text-red-700 text-center">You can start Operation after Approved</h1>
+    }
     return <AgentMenu />;
   }
-  return <UserMenu />; 
+  return <UserMenu />;
 }

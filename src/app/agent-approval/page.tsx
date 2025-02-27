@@ -27,14 +27,9 @@ const AgentApproval = () => {
                     Agents are waiting for approval and start business.
                 </p>
             </div>
-            {/* TODO:filter */}
-            <div>
-
-            </div>
             {/* table */}
-
-            <div>
-                {/* <h2 className="text-xl font-bold">Total Users:{users.length}</h2> */}
+            <div className='my-3'>
+                <h2 className="text-xl font-bold">Total pending Agent: {agents?.length}</h2>
             </div>
             {/* Table */}
             <div className="mt-5 text-white bg-popover-foreground rounded-md p-5">

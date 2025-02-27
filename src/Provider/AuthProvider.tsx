@@ -8,11 +8,11 @@ interface User {
     _id?: string;
     email?: string;
     name?: string;
-    role?: string;
     userType?: string;
     phone_number: string;
     current_balance: number | undefined;
     total_income: number;
+    account_status: string;
 }
 interface UserContextType {
     email?: string;
