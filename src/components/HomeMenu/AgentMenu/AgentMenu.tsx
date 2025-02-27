@@ -9,7 +9,7 @@ import Link from 'next/link';
 const AgentMenu = () => {
     return (
         <section className='md:max-w-2xl mx-auto'>
-            <div className='flex justify-between gap-5'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-5'>
                 <Link href='/cash-in' className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground hover:shadow-none transition-all duration-300 text-center hover:border-2 hover:border-popover-foreground'>
                     <Image src={cashIn} alt='send-money' height={50} width={50} />
                     <h2 className='text-lg font-semibold'>Cash In</h2>

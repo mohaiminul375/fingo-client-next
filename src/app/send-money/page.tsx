@@ -54,6 +54,7 @@ const SendMoney = () => {
     });
 
     const onSubmit: SubmitHandler<Inputs> = async (sendMoney) => {
+
         let userBalance = sendMoney.trx_amount;
         // TS validation
         if (typeof sendMoney.trx_amount === 'string') {
@@ -119,6 +120,9 @@ const SendMoney = () => {
         }
 
     };
+    if (user?.userType !== 'User' && user?.account_status !== "Active") {
+        return logOut();
+    }
     return (
         <>
             <section className='md:max-w-3xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-8 py-8'>
@@ -195,7 +199,7 @@ const SendMoney = () => {
                             {/* Submit Button */}
                             <div className=''>
                                 <Button variant='secondary' type="submit" disabled={!isValid}>
-                                Send Money
+                                    Send Money
                                 </Button>
                             </div>
                         </div>

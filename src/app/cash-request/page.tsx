@@ -7,7 +7,7 @@ import { useAgentCashRequest } from "./api/route";
 import toast from "react-hot-toast";
 // Send Cash Request to Admin
 const CashReq = () => {
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
     const cashRequest = useAgentCashRequest();
     // Request Function
     const handleMoneyRequest = async () => {
@@ -34,7 +34,9 @@ const CashReq = () => {
         });
 
     }
-
+    if (user?.userType !== 'Agent' && user?.account_status !== 'Active') {
+        return logOut();
+    }
     return (
         <section className='md:max-w-3xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-8 py-8'>
             <div className='space-y-5'>

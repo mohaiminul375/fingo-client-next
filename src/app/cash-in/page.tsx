@@ -36,10 +36,10 @@ interface ApiErrorResponse {
 }
 // Cah In Page
 const CashIn = () => {
+    const { user, logOut } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const verifyCashIn = useVerifyCashIn();
     const completeCashIn = useCompleteCashIn();
-    const { user } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [isVerified, setIsVerified] = useState<VerifyObj | null>(null);
     const [btnDisabled, setBtnDisabled] = useState<boolean>(false)
@@ -105,6 +105,9 @@ const CashIn = () => {
         }
 
     };
+    if (user?.userType !== 'Agent' && user?.account_status !== 'Active') {
+        return logOut();
+    }
     return (
         <>
             <section className='md:max-w-3xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-8 py-8'>

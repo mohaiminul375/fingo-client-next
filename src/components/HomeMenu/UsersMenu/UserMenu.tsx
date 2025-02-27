@@ -8,7 +8,7 @@ import Link from 'next/link';
 const UserMenu = () => {
     return (
         <section className='md:max-w-2xl mx-auto'>
-            <div className='flex justify-between gap-5'>
+            <div className='grid grid-cols-1 md:grid-cols-4 gap-5'>
                 <Link href='/send-money' className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground hover:shadow-none transition-all duration-300 text-center hover:border-2 hover:border-popover-foreground'>
                     <Image src={send_money} alt='send-money' height={50} width={50} />
                     <h2 className='text-lg font-semibold'>Send Money</h2>

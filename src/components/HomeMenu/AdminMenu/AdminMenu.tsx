@@ -24,7 +24,7 @@ const AdminMenu = () => {
             <div className='my-5'>
                 <h2 className='text-xl font-bold'>Total Transactions Created: ৳{totalAmount[0].total_created_transaction}</h2>
             </div>
-            <div className='grid grid-cols-5 gap-5'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-5'>
                 <Link href='/all-customer' className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground hover:shadow-none transition-all duration-300 text-center hover:border-2 hover:border-popover-foreground'>
                     <Image src={usersAvatar} alt='send-money' height={50} width={50} />
                     <h2 className='text-lg font-semibold'>Customers & Details Management</h2>

@@ -4,15 +4,20 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components
 import { useGetAllUsers } from "./api/route";
 import Loading from "../loading";
 import UsersTable from "@/components/Admin/UsersTable";
+import { useAuth } from "@/Provider/AuthProvider";
 
 // All Users List
 const AllCustomer = () => {
+    const { user, logOut } = useAuth();
     const { data: users = [], isPending, error, isError } = useGetAllUsers();
     if (isPending) {
         return <Loading />
     }
     if (isError) {
         return <p>Error: {(error as Error)?.message || "Something went wrong!"}</p>;
+    }
+    if (user?.userType !== 'Admin') {
+        return logOut();
     }
     return (
         <section className="">

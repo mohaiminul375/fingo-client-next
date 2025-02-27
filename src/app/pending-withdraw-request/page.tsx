@@ -4,10 +4,11 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components
 import { usePendingCashReq } from "./api/route";
 import Loading from "../loading";
 import WithdrawTable from "@/components/Admin/WithdrawTableAdmin";
+import { useAuth } from "@/Provider/AuthProvider";
 
 // Pending Cash Req list
 const PendingWithdrawReq = () => {
-
+    const { user, logOut } = useAuth();
     const { data: agents = [], isPending, error, isError } = usePendingCashReq();
     if (isPending) {
         return <Loading />
@@ -15,17 +16,18 @@ const PendingWithdrawReq = () => {
     if (isError) {
         return <p>Error: {(error as Error)?.message || "Something went wrong!"}</p>;
     }
+    if (user?.userType !== 'Admin') {
+        return logOut();
+    }
     return (
         <section className="">
             {/* Heading */}
             <div className="max-w-xl mx-auto text-center bg-popover-foreground text-white py-2 rounded-md">
                 <WebLogo />
                 <h2 className="text-xl md:text-3xl font-bold leading-tight mb-4">
-                    Welcome to Agent's Cash Request
+                    Welcome to Agent`&#39;`s Withdraw Request
                 </h2>
-                <p className="text-lg mb-6">
-                    Agent's Are waiting for approval for stars new transaction
-                </p>
+
             </div>
             {/* filter */}
             <div>

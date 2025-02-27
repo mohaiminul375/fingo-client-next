@@ -5,14 +5,20 @@ import { usePendingAgents } from './api/route';
 import Loading from '../loading';
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import PendingAgentsTable from '@/components/Admin/PendingAgentsTable';
+import { useAuth } from '@/Provider/AuthProvider';
 // Agent Approval List
 const AgentApproval = () => {
+    const { user, logOut } = useAuth();
+
     const { data: agents, isPending, error, isError } = usePendingAgents();
     if (isPending) {
         return <Loading />
     }
     if (isError) {
         return <p>Error: {(error as Error)?.message || "Something went wrong!"}</p>;
+    }
+    if (user?.userType !== 'Admin') {
+        return logOut();
     }
     return (
         <section className="">

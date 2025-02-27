@@ -11,7 +11,7 @@ import { useAgentWithdrawRequest } from './api/route';
 // With Request from agent
 const WithdrawReq = () => {
     const withdrawRequest = useAgentWithdrawRequest();
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
     const [amount, setAmount] = useState('');
     const handleWithdraw = (e) => {
         e.preventDefault()
@@ -42,6 +42,9 @@ const WithdrawReq = () => {
 
             }
         });
+    }
+    if (user?.userType !== 'Agent' && user?.account_status !== 'Active') {
+        return logOut();
     }
     return (
         <section className='md:max-w-3xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-8 py-8'>

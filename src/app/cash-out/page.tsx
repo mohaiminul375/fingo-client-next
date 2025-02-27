@@ -40,7 +40,7 @@ const CashOut = () => {
     const [isLoading, setIsLoading] = useState(false);
     const verifySendMoney = useVerifyCashOut();
     const completeSendMoney = useCompleteCashOut();
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [isVerified, setIsVerified] = useState<VerifyObj | null>(null);
     const [btnDisabled, setBtnDisabled] = useState<boolean>(false)
@@ -85,7 +85,9 @@ const CashOut = () => {
             toast.error(netWorkError)
         }
     };
-
+    if (user?.userType !== 'Agent' && user?.account_status !== 'Active') {
+        return logOut();
+    }
     // Handle button animation and complete cash out
     const handleCompleteSendMoney = async () => {
         setBtnDisabled(true)

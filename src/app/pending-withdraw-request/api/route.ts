@@ -18,7 +18,7 @@ export const usePendingCashReq = () => {
             const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-withdrawRequest-agent`)
             return data;
         },
-        queryKey: ['all-withdraw-request']
+        queryKey: ['all-pending-cash-request']
     })
     return { data, isPending, isError, error }
 }
@@ -38,7 +38,7 @@ export const useApproveCashReq = () => {
                     text: "Approved successfully",
                     icon: "success"
                 });
-                queryClient.invalidateQueries({ queryKey: ['all-cash-request'] })
+                queryClient.invalidateQueries({ queryKey: ['all-pending-cash-request'] })
             }
         }, onError: () => {
             toast.error('failed approved')

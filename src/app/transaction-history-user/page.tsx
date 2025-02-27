@@ -5,7 +5,7 @@ import { useGetUserTrx } from './api/route';
 import Loading from '../loading';
 
 const UserTrxHistory = () => {
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
     const phone_number = user?.phone_number;
     const { data: history = [], isPending, error, isError } = useGetUserTrx({ phone_number: phone_number as string });
     if (isPending) {
@@ -14,7 +14,9 @@ const UserTrxHistory = () => {
     if (isError) {
         return <p>Error: {(error as Error)?.message || "Something went wrong!"}</p>;
     }
-
+    if (user?.userType !== 'User' && user?.userType !== "Active") {
+        return logOut();
+    }
     return (
         <section className="border-2  md:max-w-xl mx-auto bg-popover-foreground md:p-5 md:rounded-md text-white">
             {/* Heading */}
@@ -55,7 +57,7 @@ const UserTrxHistory = () => {
                             {
                                 trx.method === 'New_user_bonus_receive' && <p>{trx.sender_name} ({trx.sender_phone_number})</p>
                             }
-                       
+
                         </div>
                         <p className={`font-semibold ${["user_received_money", "Agent_cash_in", "New_user_bonus_receive"].includes(trx.method) ? "text-green-400" : "text-red-400"}`}>
                             {["user_received_money", "Agent_cash_in", "New_user_bonus_receive"].includes(trx.method) ? "+" : "-"} {trx.amount} Taka

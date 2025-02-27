@@ -22,7 +22,7 @@ interface queryProps {
 export const useGetUserTrx = ({ phone_number }: queryProps) => {
     const { data, isPending, isError, error } = useQuery<TrxProp[]>({
         queryFn: async () => {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-transaction-agent/${phone_number}`)
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-transactions-agent/${phone_number}`)
             return data;
         },
         queryKey: ['all-user-trx']
