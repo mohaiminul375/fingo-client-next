@@ -39,20 +39,21 @@
 - #Send Money
 - User can send money to another user and it #Verify before transaction
 - #Cash Out
-- User can Cashout throught Authorized Agent it #Verify before transaction
-- User cant tranasaction more than balance
+- User can cash out through Authorized Agent it #Verify before transaction
+- User can't transact more than balance
+- User can see their transaction history
 
 # Agent
 
 - Login Redirect: Upon visiting the website, users are redirected to the login page.
 - Home Page: After logging in, the user is redirected to the Home page, where they can #Send Money #Cash out # And #Transaction_history after admin approval.
-- AGent can send money and cash in user and trx he can income
+- Agent can send money and cash In the user, and every transaction agent can income
 - agent can request new balance and withdraw income
 
 - Admin
 - Admin Dashboard: Admins are redirected to the Home page dashboard after logging in.
-  -Admins can manage YouTube tutorials by adding, editing, and deleting them.
-- admin can approve agent and approved Agents cash requst and wihdraw request
+- Admin can approve agent and approved Agents cash requst and wihdraw request.
+- Admin can see all users list
 
 # Access Info
 
@@ -65,7 +66,7 @@
 # Technology
 
 - HTML, CSS, ShadCn, Next.js, Typescript (Front-End)
-- Express.js, MongoDB,JWT, brcypt(Back-End)
+- Express.js, MongoDB, JWT, brcypt(Back-End)
 - Custom Authentication
 
 # npm and Packages
@@ -80,7 +81,7 @@
 - react hot toast
 - sweet alert 2
 - axios
- ***I have tried my best to implement the features within the available time. If I had more time, I would add more features.***
+# ***I have tried to implement the features within the time that is available. If I had more time, I would add more features.***
 # Server Side
 
 - https://github.com/mohaiminul375/fingo-server
