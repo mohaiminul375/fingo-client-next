@@ -50,7 +50,7 @@
 - Agent can send money and cash In the user, and every transaction agent can income
 - agent can request new balance and withdraw income
 
-- Admin
+# Admin
 - Admin Dashboard: Admins are redirected to the Home page dashboard after logging in.
 - Admin can approve agent and approved Agents cash requst and wihdraw request.
 - Admin can see all users list
