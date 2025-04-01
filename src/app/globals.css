@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* * {
+  border: 2px;
+  border-color: red;
+} */
 
 @layer base {
   :root {
 
-    --background:0,0%,82.75%;
+    --background: 220, 8%, 23%;
 
     --foreground: 0, 0%, 0%;
     /*#003e78 dark shade of blue*/
@@ -20,7 +23,8 @@
 
     /* --popover-foreground: 222.2 84% 4.9%; */
     /* --popover-foreground: 222.2 84% 4.9%; */
-    --popover-foreground: 209, 100%, 23.53%; /* previous*/
+    --popover-foreground: 209, 100%, 23.53%;
+    /* previous*/
 
     --primary: 0 47.4% 11.2%;
 

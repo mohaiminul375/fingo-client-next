@@ -15,10 +15,10 @@ export default function Navbar() {
     const { user, logOut, loading } = useAuth();
     console.log(user, loading)
     return (
-        <header className="flex h-20 w-full items-center px-4 md:px-6 shadow-xl border-b-2 bg-popover-foreground ">
+        <header className="flex h-20 w-full items-center px-4 md:px-6 shadow-xl border-b-2 bg-popover-foreground rounded-t-2xl ">
             <Link href="/" className="flex items-center">
-                <Image src={logo} alt="site_logo" height={50} width={50} className="rounded-full" />
-                <span className="ml-2 text-4xl italic font-extrabold text-white hidden lg:flex items-center">
+                <Image src={logo} alt="site_logo" height={30} width={30} className="rounded-full" />
+                <span className="ml-2 text-xl italic font-extrabold text-white hidden lg:flex items-center">
                     FingGo
                     <RiMenu2Fill className="text-3xl mt-2" />
                 </span>
@@ -32,19 +32,19 @@ export default function Navbar() {
                     <div className="ml-auto flex items-center">
                         {/* Balance toggle */}
                         <div
-                            className="relative flex items-center m-10 h-14 rounded-full bg-white cursor-pointer px-5 transition-all duration-300"
+                            className="relative flex items-center mr-3 h-10 rounded-full bg-white cursor-pointer px-2 transition-all duration-300"
                             onClick={() => setShowBalance(!showBalance)}
                         >
                             {/* Taka symbol and Check Balance (Initially Visible) */}
                             <span
-                                className={`text-lg font-medium transition-all duration-300 ${showBalance ? "opacity-0 w-0 overflow-hidden" : "opacity-100"}`}
+                                className={`text-sm font-medium transition-all duration-300 ${showBalance ? "opacity-0 w-0 overflow-hidden" : "opacity-100"}`}
                             >
                                 ৳ Check Balance
                             </span>
 
                             {/* Balance and Income (Initially Hidden, Shown on Click) and user Type validate*/}
                             <div className={`flex flex-col ml-3 transition-all duration-300 ${showBalance ? "opacity-100" : "opacity-0 w-0 overflow-hidden"}`}>
-                                <span className="text-lg font-medium">Balance: {user.current_balance} ৳</span>
+                                <span className="text-lg font-medium">Balance: ৳{user.current_balance} </span>
                                 {
                                     user?.userType !== 'User' && <span className="text-sm text-gray-600">Income: {user?.total_income} ৳</span>
                                 }
@@ -59,7 +59,7 @@ export default function Navbar() {
                                     <AvatarFallback />
                                 </Avatar>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent>
+                            <DropdownMenuContent className="">
                                 <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
                                 <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
                                 <DropdownMenuLabel onClick={logOut}>LogOut</DropdownMenuLabel>

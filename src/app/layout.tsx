@@ -42,22 +42,25 @@ export default function RootLayout({
     <html lang="en">
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased border-8 rounded-3xl border-[#4E4EC7] md:max-w-[500px] md:w-[500px]  min-h-screen mx-auto`}
       >
-        <AuthProvider>
-          <QueryClientProvider client={queryClient}>
-            <Navbar />
-            <main className="max-w-5xl mx-auto md:px-0 px-2 mt-10">
-              
-              {children}
-            </main>
-            <Toaster
-              position="top-center"
-              reverseOrder={false}
-            />
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </AuthProvider>
+        <main className="border-8 md:min-w-[484px] rounded-3xl mx-auto border-black bg-white">
+
+          <AuthProvider>
+            <QueryClientProvider client={queryClient}>
+              <Navbar />
+              <main className="md:px-0 px-2 min-h-screen mt-10 rounded-3xl">
+
+                {children}
+              </main>
+              <Toaster
+                position="top-center"
+                reverseOrder={false}
+              />
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+          </AuthProvider>
+        </main>
       </body>
     </html>
   );
