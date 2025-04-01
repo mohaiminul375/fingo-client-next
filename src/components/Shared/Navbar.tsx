@@ -15,7 +15,7 @@ export default function Navbar() {
     const { user, logOut, loading } = useAuth();
     console.log(user, loading)
     return (
-        <header className="flex h-20 w-full items-center px-4 md:px-6 shadow-xl border-b-2 bg-popover-foreground rounded-t-2xl ">
+        <header className="flex h-20 w-full items-center px-4 md:px-6 shadow-xl border-b-2 bg-popover-foreground md:rounded-t-2xl ">
             <Link href="/" className="flex items-center">
                 <Image src={logo} alt="site_logo" height={30} width={30} className="rounded-full" />
                 <span className="ml-2 text-xl italic font-extrabold text-white hidden lg:flex items-center">
@@ -44,7 +44,7 @@ export default function Navbar() {
 
                             {/* Balance and Income (Initially Hidden, Shown on Click) and user Type validate*/}
                             <div className={`flex flex-col ml-3 transition-all duration-300 ${showBalance ? "opacity-100" : "opacity-0 w-0 overflow-hidden"}`}>
-                                <span className="text-lg font-medium">Balance: ৳{user.current_balance} </span>
+                                <span className="text-lg font-medium">৳ {user.current_balance} </span>
                                 {
                                     user?.userType !== 'User' && <span className="text-sm text-gray-600">Income: {user?.total_income} ৳</span>
                                 }

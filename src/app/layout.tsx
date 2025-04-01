@@ -42,14 +42,16 @@ export default function RootLayout({
     <html lang="en">
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased border-8 rounded-3xl border-[#4E4EC7] md:max-w-[500px] md:w-[500px]  min-h-screen mx-auto`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased md:border-8 md:rounded-3xl md:border-[#4E4EC7] md:max-w-[500px] md:w-[500px]   mx-auto`}
       >
-        <main className="border-8 md:min-w-[484px] rounded-3xl mx-auto border-black bg-white">
+     
+      
+        <main className="md:border-8 md:min-w-[484px] md:rounded-3xl mx-auto border-black bg-white">
 
           <AuthProvider>
             <QueryClientProvider client={queryClient}>
               <Navbar />
-              <main className="md:px-0 px-2 min-h-screen mt-10 rounded-3xl">
+              <main className="md:px-0 px-2 min-h-[calc(100vh-150px)] mt-10 rounded-3xl">
 
                 {children}
               </main>

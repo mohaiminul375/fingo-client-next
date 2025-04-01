@@ -8,20 +8,24 @@ import Link from 'next/link';
 const UserMenu = () => {
     return (
         <section className='md:max-w-2xl mx-auto'>
-            <div className='grid grid-cols-1 md:grid-cols-4 gap-5'>
-                <Link href='/send-money' className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground hover:shadow-none transition-all duration-300 text-center hover:border-2 hover:border-popover-foreground'>
-                    <Image src={send_money} alt='send-money' height={50} width={50} />
-                    <h2 className='text-lg font-semibold'>Send Money</h2>
+            <div className='flex justify-around items-start'>
+                <Link href='/send-money' className='flex flex-col justify-center items-center'>
+                    <Image src={send_money} alt='send-money' height={40} width={40} />
+                    <h2 className='text-base font-semibold'>Send Money</h2>
                 </Link>
+                {/* TODO: change icons */}
                 {/* cash out */}
-                <Link href='/cash-out' className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground hover:shadow-none transition-all duration-300 text-center hover:border-2 hover:border-popover-foreground'>
-                    <Image src={cashOut} alt='send-money' height={50} width={50} />
-                    <h2 className='text-lg font-semibold'>Cash Out</h2>
+                <Link href='/cash-out' className='flex flex-col justify-center items-center'>
+                    <Image src={cashOut} alt='send-money' height={40} width={40} />
+                    <h2 className='text-base font-semibold'>cash out</h2>
                 </Link>
-                {/* trx history */}
-                <Link href='/transaction-history-user' className='flex flex-col justify-center items-center lg:w-40 p-5 rounded-md shadow-lg shadow-popover-foreground hover: text-popover-foreground hover:shadow-none transition-all duration-300 text-center hover:border-2 hover:border-popover-foreground'>
-                    <Image src={trx_history} alt='send-money' height={50} width={50} />
-                    <h2 className='text-lg font-semibold'>Transaction History</h2>
+
+                {/* TRx history */}
+                <Link href='/cash-out' className='flex flex-col justify-center items-center'>
+                    <Image src={trx_history} alt='send-money' height={30} width={30} />
+                    <h2 className='text-base font-semibold text-center'>Transaction <br />
+                        History
+                    </h2>
                 </Link>
             </div>
         </section>
