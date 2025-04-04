@@ -1,7 +1,6 @@
 'use client'
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import AdminMenu from "@/components/HomeMenu/AdminMenu/AdminMenu";
 import AgentMenu from "@/components/HomeMenu/AgentMenu/AgentMenu";
 import UserMenu from "@/components/HomeMenu/UsersMenu/UserMenu";
 import { useAuth } from "@/Provider/AuthProvider";
@@ -36,7 +35,7 @@ export default function Home() {
   }
 
   if (user?.userType === 'Admin') {
-    return <AdminMenu />;
+    return router.push('/admin-dashboard')
   }
   if (user?.userType === 'Agent') {
     if (user?.account_status !== 'Active') {

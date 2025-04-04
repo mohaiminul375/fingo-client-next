@@ -10,6 +10,7 @@ import {
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { AuthProvider } from "@/Provider/AuthProvider";
+import { usePathname } from "next/navigation";
 
 
 
@@ -38,30 +39,30 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const path = usePathname();
+  console.log(path);
   return (
     <html lang="en">
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased md:border-8 md:rounded-3xl md:border-[#4E4EC7] md:max-w-[500px] md:w-[500px]   mx-auto`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-     
-      
-        <main className="md:border-8 md:min-w-[484px] md:rounded-3xl mx-auto border-black bg-white">
-
-          <AuthProvider>
-            <QueryClientProvider client={queryClient}>
-              <Navbar />
-              <main className="md:px-0 px-2 min-h-[calc(100vh-152px)] mt-10 rounded-3xl">
-
-                {children}
-              </main>
-              <Toaster
-                position="top-center"
-                reverseOrder={false}
-              />
-              <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
-          </AuthProvider>
+        <main className={`${path !== '/admin-dashboard' && 'md:rounded-3xl md:border-[#4E4EC7] md:border-8  md:max-w-[500px] md:w-[500px] '}  md:min-w-[484px] bg-white md:px-0 min-h-[calc(100vh-152px)]   mx-auto`}>
+          <div className={`${path !== '/admin-dashboard' && "md:border-black md:border-8 rounded-2xl min-h-[calc(100vh-152px)]"}`}> {/*for black border */}
+            <AuthProvider>
+              <QueryClientProvider client={queryClient}>
+                <Navbar />
+                <main className={`mt-10 min-h-[calc(100vh-120px)]  ${path !== '/admin-dashboard' && 'md:min-h-[calc(100vh-152px)]'}`}>
+                  {children}
+                </main>
+                <Toaster
+                  position="top-center"
+                  reverseOrder={false}
+                />
+                <ReactQueryDevtools initialIsOpen={false} />
+              </QueryClientProvider>
+            </AuthProvider>
+          </div>
         </main>
       </body>
     </html>

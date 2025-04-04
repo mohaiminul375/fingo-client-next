@@ -15,7 +15,7 @@ export default function Navbar() {
     const { user, logOut, loading } = useAuth();
     console.log(user, loading)
     return (
-        <header className="flex h-20 w-full items-center px-4 md:px-6 shadow-xl border-b-2 bg-popover-foreground md:rounded-t-2xl ">
+        <header className="flex h-20 w-full items-center px-4 md:px-6 shadow-xl border-b-2 bg-popover-foreground ">
             <Link href="/" className="flex items-center">
                 <Image src={logo} alt="site_logo" height={30} width={30} className="rounded-full" />
                 <span className="ml-2 text-xl italic font-extrabold text-white hidden lg:flex items-center">
