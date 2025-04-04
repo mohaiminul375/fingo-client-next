@@ -51,7 +51,7 @@ export default function RootLayout({
           <AuthProvider>
             <QueryClientProvider client={queryClient}>
               <Navbar />
-              <main className="md:px-0 px-2 min-h-[calc(100vh-150px)] mt-10 rounded-3xl">
+              <main className="md:px-0 px-2 min-h-[calc(100vh-152px)] mt-10 rounded-3xl">
 
                 {children}
               </main>

@@ -6,7 +6,7 @@ import logo from "../../public/logo.png";
 // Custom loading
 const Loading = () => {
     return (
-        <div className="min-h-[50vh] flex justify-center items-center bg-transparent">
+        <div className="min-h-[calc(100vh-50px)] flex justify-center items-center bg-transparent">
             <span className="relative p-2 rounded-full w-fit bg-transparent">
                 {/* Animated Border */}
                 <span className="absolute inset-0  border-8 border-transparent animate-border rounded-full"></span>
