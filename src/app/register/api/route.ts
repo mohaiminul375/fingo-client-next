@@ -9,7 +9,7 @@ export const useCreateUser = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (user_info: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/create-user`, user_info)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL2}/create-user`, user_info)
             return data
         },
         mutationKey: ['create-user'],

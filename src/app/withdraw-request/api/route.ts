@@ -15,7 +15,7 @@ export const useAgentWithdrawRequest = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (newWithdraw: ReqProp) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/request-withdraw-agent`, newWithdraw)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL2}/request-withdraw-agent`, newWithdraw)
             return data
         },
         mutationKey: ['withdraw-request'],

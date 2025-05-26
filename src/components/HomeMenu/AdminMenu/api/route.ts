@@ -4,7 +4,7 @@ import axios from "axios";
 export const useGetTotalTrx = () => {
     const { data, isPending, isError, error } = useQuery({
         queryFn: async () => {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/total-transaction-platform`)
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL2}/total-transaction-platform`)
             return data;
         },
         queryKey: ['total-transaction']

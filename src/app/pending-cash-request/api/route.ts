@@ -15,7 +15,7 @@ interface CashReq {
 export const usePendingCashReq = () => {
     const { data, isPending, isError, error } = useQuery<CashReq[]>({
         queryFn: async () => {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cashRequest-agent`)
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL2}/all-cashRequest-agent`)
             return data;
         },
         queryKey: ['all-withdraw-request']
@@ -27,7 +27,7 @@ export const useApproveWithdraw = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (cash_Req: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/approve-withdraw-cashRequest`, cash_Req)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL2}/approve-withdraw-cashRequest`, cash_Req)
             return data
         },
         mutationKey: ['approve-cash-request'],

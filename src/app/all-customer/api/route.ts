@@ -14,7 +14,7 @@ interface Users {
 export const useGetAllUsers = () => {
     const { data, isPending, isError, error } = useQuery<Users[]>({
         queryFn: async () => {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-users-admin`)
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL2}/all-users-admin`)
             return data;
         },
         queryKey: ['all-users']

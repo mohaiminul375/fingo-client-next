@@ -21,7 +21,7 @@ interface UpdateProps {
 export const usePendingAgents = () => {
     const { data, isPending, isError, error } = useQuery<PendingAgents[]>({
         queryFn: async () => {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-pending-agent-admin`)
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL2}/all-pending-agent-admin`)
             return data;
         },
         queryKey: ['all-pending-agents']
@@ -33,7 +33,7 @@ export const useApprovedAgent = () => {
     const queryClient = useQueryClient()
     return useMutation({
         mutationFn: async ({ id, newStatus }: UpdateProps) => {
-            const { data } = await axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/agent-approval-admin/${id}`, newStatus)
+            const { data } = await axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL2}/agent-approval-admin/${id}`, newStatus)
             return data
         },
         mutationKey: ['approve-agent'],
