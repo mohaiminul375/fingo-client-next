@@ -20,8 +20,8 @@ type Inputs = {
     email: string;
     PIN: number;
     NID: string;
-    userType: string;
     avatar: string;
+    accountType: string;
 }
 // Register page
 const Register = () => {
@@ -56,7 +56,7 @@ const Register = () => {
     };
 
     const onSubmit: SubmitHandler<Inputs> = async (user_info) => {
-        user_info.userType = userType;
+        user_info.accountType = userType;
 
         if (images.length === 0 || !images[0]?.file) {
             toast.error("Image is required!");
