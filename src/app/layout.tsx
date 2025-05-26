@@ -10,6 +10,7 @@ import {
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { AuthProvider } from "@/Provider/AuthProvider";
+import { ThemeProvider } from "next-themes";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,25 +36,32 @@ export default function RootLayout({
     <html lang="en">
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}
       >
-        <main className={`  md:min-w-[484px] bg-white md:px-0 min-h-[calc(100vh-152px)]   mx-auto`}>
-          <div> {/*for black border */}
-            <AuthProvider>
-              <QueryClientProvider client={queryClient}>
-                <Navbar />
-                <main className={`mt-10 min-h-[calc(100vh-120px)]`}>
-                  {children}
-                </main>
-                <Toaster
-                  position="top-center"
-                  reverseOrder={false}
-                />
-                <ReactQueryDevtools initialIsOpen={false} />
-              </QueryClientProvider>
-            </AuthProvider>
-          </div>
-        </main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main className={`md:min-w-[484px] md:px-0 min-h-[calc(100vh-152px)]   mx-auto`}>
+            <div> {/*for black border */}
+              <AuthProvider>
+                <QueryClientProvider client={queryClient}>
+                  <Navbar />
+                  <main className={`mt-10 min-h-[calc(100vh-120px)]`}>
+                    {children}
+                  </main>
+                  <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                  />
+                  <ReactQueryDevtools initialIsOpen={false} />
+                </QueryClientProvider>
+              </AuthProvider>
+            </div>
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );
