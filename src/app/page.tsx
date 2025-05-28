@@ -16,7 +16,7 @@ import Loading from "./loading";
 //   </>
 // }
 export default function Home() {
-  // Home page access base on userType
+  // Home page access base on accountType
   const router = useRouter();
   const { user, loading } = useAuth();
 
@@ -34,10 +34,10 @@ export default function Home() {
     return null;
   }
 
-  if (user?.userType === 'Admin') {
+  if (user?.accountType === 'Admin') {
     return router.push('/admin-dashboard')
   }
-  if (user?.userType === 'Agent') {
+  if (user?.accountType === 'Agent') {
     if (user?.account_status !== 'Active') {
       return <h1 className="text-3xl text-red-700 text-center">You can start Operation after Approved</h1>
     }

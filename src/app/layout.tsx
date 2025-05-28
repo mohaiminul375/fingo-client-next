@@ -44,12 +44,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className={`md:min-w-[484px] md:px-0 min-h-[calc(100vh-152px)]   mx-auto`}>
+          <main className={`md:min-w-[484px] md:px-0 min-h-[calc(100vh-152px)] mx-auto`}>
             <div> {/*for black border */}
               <AuthProvider>
                 <QueryClientProvider client={queryClient}>
                   <Navbar />
-                  <main className={`mt-10 min-h-[calc(100vh-120px)]`}>
+                  <main className={`mt-10 min-h-[calc(100vh-120px)] md:max-w-7xl mx-auto`}>
                     {children}
                   </main>
                   <Toaster

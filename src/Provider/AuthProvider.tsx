@@ -8,7 +8,7 @@ interface User {
     _id?: string;
     email?: string;
     name?: string;
-    userType?: string;
+    accountType?: string;
     phone_number: string;
     current_balance: number | undefined;
     total_income: number;
@@ -19,7 +19,7 @@ interface UserContextType {
     user?: User | null;
     loading: boolean;
     error?: string | null;
-    logOut?: () => void;
+    logOut: () => void;
     setToken: React.Dispatch<React.SetStateAction<string | null>>;
 }
 const AuthContext = createContext<UserContextType | undefined>(undefined);
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             const fetchUser = async () => {
                 try {
                     setLoading(true);
-                    const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL2}/user`, {
+                    const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/user-data`, {
                         headers: {
                             Authorization: `Bearer ${storedToken}`,
                         },

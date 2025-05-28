@@ -16,7 +16,7 @@ const AllCustomer = () => {
     if (isError) {
         return <p>Error: {(error as Error)?.message || "Something went wrong!"}</p>;
     }
-    if (user?.userType !== 'Admin') {
+    if (user?.accountType !== 'Admin') {
         return logOut();
     }
     return (
