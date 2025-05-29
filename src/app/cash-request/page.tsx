@@ -34,7 +34,7 @@ const CashReq = () => {
         });
 
     }
-    if (user?.userType !== 'Agent' && user?.account_status !== 'Active') {
+    if (user?.accountType !== 'Agent' && user?.account_status !== 'Active') {
         return logOut();
     }
     return (

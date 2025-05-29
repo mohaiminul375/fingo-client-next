@@ -1,12 +1,14 @@
-import React from 'react';
 import { TableCell, TableRow } from '../ui/table';
+import { Button } from '../ui/button';
+import { ImBlocked } from "react-icons/im";
+import Swal from 'sweetalert2';
 interface User {
     _id: string,
     name: string,
     phone_number: string,
     email: string,
-    userType: string,
-    account_status: string;
+    accountType: string,
+    status: string;
     createdAt: string;
 }
 interface TableProps {
@@ -15,8 +17,28 @@ interface TableProps {
 }
 // Table of Users
 const UsersTable = ({ user, idx }: TableProps) => {
-    const { _id, name, phone_number, email, userType, account_status, createdAt } = user;
-    // const date =new Date(createdAt).tol;
+    const { _id, name, phone_number, email, accountType, status, createdAt } = user;
+    const blockUser = (_id: string) => {
+        console.log(_id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Still want to send Request!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#003E78",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                // const newReq = {
+                //     agent_name: user?.name,
+                //     agent_number: user?.phone_number
+                // }
+                // await cashRequest.mutateAsync(newReq)
+
+            }
+        });
+    }
     return (
         <TableRow className='text-center'>
             <TableCell>{idx + 1}</TableCell>
@@ -27,12 +49,17 @@ const UsersTable = ({ user, idx }: TableProps) => {
                 {phone_number} <br />{email}
             </TableCell>
             <TableCell>
-                {userType} <br />{account_status}
+                {accountType} <br />{status}
             </TableCell>
             <TableCell>
                 {new Date(createdAt).toLocaleString()}
             </TableCell>
             <TableCell>
+                <Button
+                    disabled={email === 'mohaiminul375@gmail.com'}
+                    onClick={() => blockUser(_id)} variant='secondary'>
+                    <ImBlocked className='text-red-700' />
+                </Button>
             </TableCell>
             {/* <TableCell className="text-right">
                 <div className="flex justify-end gap-2">
