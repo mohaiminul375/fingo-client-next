@@ -22,7 +22,6 @@ const PendingAgentsTable = ({ agent, idx }: TableProps) => {
     const { _id, name, phone_number, email, userType, account_status, createdAt } = agent;
     // Handle function of Approve agent
     const handleApproveAgent = async (id: string) => {
-        const newStatus = { account_status: 'Active' }
         Swal.fire({
             title: "Are you sure?",
             text: "Still want to Withdraw!",
@@ -33,7 +32,7 @@ const PendingAgentsTable = ({ agent, idx }: TableProps) => {
             confirmButtonText: "Yes"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await approveAgent.mutateAsync({ id, newStatus })
+                await approveAgent.mutateAsync(id)
             }
         });
 

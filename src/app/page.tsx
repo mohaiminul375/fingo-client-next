@@ -38,7 +38,7 @@ export default function Home() {
     return router.push('/admin-dashboard')
   }
   if (user?.accountType === 'Agent') {
-    if (user?.account_status !== 'Active') {
+    if (user?.status !== 'Active') {
       return <h1 className="text-3xl text-red-700 text-center">You can start Operation after Approved</h1>
     }
     return <AgentMenu />;

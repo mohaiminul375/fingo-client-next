@@ -2,6 +2,7 @@ import { TableCell, TableRow } from '../ui/table';
 import { Button } from '../ui/button';
 import { ImBlocked } from "react-icons/im";
 import Swal from 'sweetalert2';
+import { useBlockUser } from '@/app/all-customer/api/route';
 interface User {
     _id: string,
     name: string,
@@ -18,7 +19,8 @@ interface TableProps {
 // Table of Users
 const UsersTable = ({ user, idx }: TableProps) => {
     const { _id, name, phone_number, email, accountType, status, createdAt } = user;
-    const blockUser = (_id: string) => {
+    const blockUser = useBlockUser()
+    const handleBlockUser = (_id: string) => {
         console.log(_id);
         Swal.fire({
             title: "Are you sure?",
@@ -30,12 +32,7 @@ const UsersTable = ({ user, idx }: TableProps) => {
             confirmButtonText: "Yes"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                // const newReq = {
-                //     agent_name: user?.name,
-                //     agent_number: user?.phone_number
-                // }
-                // await cashRequest.mutateAsync(newReq)
-
+                await blockUser.mutateAsync(_id)
             }
         });
     }
@@ -55,11 +52,11 @@ const UsersTable = ({ user, idx }: TableProps) => {
                 {new Date(createdAt).toLocaleString()}
             </TableCell>
             <TableCell>
-                <Button
+                {status === 'Blocked' ? <Button variant='secondary'>Blocked</Button> : <Button
                     disabled={email === 'mohaiminul375@gmail.com'}
-                    onClick={() => blockUser(_id)} variant='secondary'>
+                    onClick={() => handleBlockUser(_id)} variant='secondary'>
                     <ImBlocked className='text-red-700' />
-                </Button>
+                </Button>}
             </TableCell>
             {/* <TableCell className="text-right">
                 <div className="flex justify-end gap-2">

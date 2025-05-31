@@ -1,3 +1,4 @@
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -8,15 +9,16 @@ interface Users {
     name: string,
     phone_number: string,
     email: string,
-    userType: string,
-    account_status: string;
+    accountType: string,
+    status: string;
     createdAt: string;
 }
 // Get All Users
 export const useGetAllUsers = () => {
+    const axiosSecure = useAxiosSecure();
     const { data, isPending, isError, error } = useQuery<Users[]>({
         queryFn: async () => {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/all-users`)
+            const { data } = await axiosSecure.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/all-users`)
             return data;
         },
         queryKey: ['all-users']
@@ -27,16 +29,17 @@ export const useGetAllUsers = () => {
 export const useBlockUser = () => {
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: async (id: string) => {
-            const { data } = await axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL2}/agent-approval-admin/${id}`)
+        mutationFn: async (_id: string) => {
+            console.log('insude qyert', _id)
+            const { data } = await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/block-user/${_id}`, { status: 'block' })
             return data
         },
-        mutationKey: ['approve-agent'],
+        mutationKey: ['block-user'],
         onSuccess: (data) => {
             if (data?.success) {
                 Swal.fire({
                     title: "Success",
-                    text: "Request Approved",
+                    text: "user Blocked",
                     icon: "success"
                 });
                 queryClient.invalidateQueries({ queryKey: ['all-users'] })
@@ -44,9 +47,6 @@ export const useBlockUser = () => {
         }, onError: (error) => {
             toast.error('failed operation try again latter')
             console.log(error)
-            //error.response.data.message
-
-
         },
     })
 }

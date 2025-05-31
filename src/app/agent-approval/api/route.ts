@@ -1,6 +1,6 @@
 'use client'
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
@@ -13,15 +13,14 @@ interface PendingAgents {
     account_status: string | undefined;
     createdAt: string;
 }
-interface UpdateProps {
-    id: string,
-    newStatus: object,
-}
+
 // List of Pending Status Agents
 export const usePendingAgents = () => {
+    const axiosSecure = useAxiosSecure()
     const { data, isPending, isError, error } = useQuery<PendingAgents[]>({
         queryFn: async () => {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL2}/all-pending-agent-admin`)
+            const { data } = await axiosSecure
+                .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/all-pending-agents`)
             return data;
         },
         queryKey: ['all-pending-agents']
@@ -30,15 +29,17 @@ export const usePendingAgents = () => {
 }
 // Approve Agent to Active
 export const useApprovedAgent = () => {
+    const axiosSecure = useAxiosSecure()
+
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: async ({ id, newStatus }: UpdateProps) => {
-            const { data } = await axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL2}/agent-approval-admin/${id}`, newStatus)
+        mutationFn: async (id: string) => {
+            const { data } = await axiosSecure.patch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/approve-agent/${id}`)
             return data
         },
         mutationKey: ['approve-agent'],
         onSuccess: (data) => {
-            if (data.modifiedCount > 0) {
+            if (data.success) {
                 Swal.fire({
                     title: "Success",
                     text: "Request Approved",

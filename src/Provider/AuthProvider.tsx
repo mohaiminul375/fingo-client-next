@@ -1,6 +1,6 @@
 'use client'
 import Loading from "@/app/loading";
-import axios from "axios";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useRouter } from "next/navigation";
 import { ReactNode, useContext, useEffect, useState } from "react";
 import { createContext } from "react";
@@ -12,7 +12,7 @@ interface User {
     phone_number: string;
     current_balance: number | undefined;
     total_income: number;
-    account_status: string;
+    status: string;
 }
 interface UserContextType {
     email?: string;
@@ -24,12 +24,14 @@ interface UserContextType {
 }
 const AuthContext = createContext<UserContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+    const axiosSecure = useAxiosSecure();
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [token, setToken] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
     useEffect(() => {
+
         if (typeof window !== 'undefined') {
             const storedToken = sessionStorage.getItem('token');
             // setToken(storedToken);
@@ -42,11 +44,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             const fetchUser = async () => {
                 try {
                     setLoading(true);
-                    const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/user-data`, {
-                        headers: {
-                            Authorization: `Bearer ${storedToken}`,
-                        },
-                    });
+                    const response = await axiosSecure.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/user-data`,
+                    );
                     if (!response) {
                         return
                     }

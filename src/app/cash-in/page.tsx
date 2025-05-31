@@ -17,18 +17,18 @@ import { AxiosError } from 'axios';
 // TODO: cashIn error
 type Inputs = {
     name: string;
-    user_phone_number: string;
+    receiver_phone_number: string;
     PIN: string;
     trx_amount: number;
-    agent_name: string | undefined;
-    agent_phone_number: string | undefined;
+    sender_name: string | undefined;
+    sender_phone_number: string | undefined;
     method: string;
 }
 interface VerifyObj {
-    agent_name: string;
-    agent_phone_number: string;
-    user_phone_number: string;
-    user_name: string;
+    sender_name: string;
+    sender_phone_number: string;
+    receiver_phone_number: string;
+    receiver_name: string;
     amount: number;
 }
 interface ApiErrorResponse {
@@ -56,8 +56,8 @@ const CashIn = () => {
             return toast.error('Agent name and phone number not found');
         }
         cashIn.method = 'cashIn';
-        cashIn.agent_name = user?.name;
-        cashIn.agent_phone_number = user?.phone_number;
+        cashIn.sender_name = user?.name;
+        cashIn.sender_phone_number = user?.phone_number;
         // Verify cash In
         const res = await verifyCashIn.mutateAsync(cashIn);
         try {
@@ -105,7 +105,7 @@ const CashIn = () => {
         }
 
     };
-    if (user?.userType !== 'Agent' && user?.account_status !== 'Active') {
+    if (user?.accountType !== 'Agent' && user?.status !== 'Active') {
         return logOut();
     }
     return (
@@ -125,7 +125,7 @@ const CashIn = () => {
                             <div className="grid w-full items-center gap-1.5">
                                 <Label>Customer Phone Number <span className='text-red-700 font-bold'>*</span></Label>
                                 <Input type="tel" placeholder="Enter your phone number"
-                                    {...register("user_phone_number", {
+                                    {...register("receiver_phone_number", {
                                         required: "Phone number is required",
                                         pattern: {
                                             value: /^[0-9]+$/,
@@ -135,7 +135,7 @@ const CashIn = () => {
                                         maxLength: { value: 11, message: "Phone number must be 11 characters" }
                                     })}
                                 />
-                                {errors.user_phone_number && <p className="text-red-500">{errors.user_phone_number.message}</p>}
+                                {errors.receiver_phone_number && <p className="text-red-500">{errors.receiver_phone_number.message}</p>}
                             </div>
 
                             {/* Amount */}
@@ -207,8 +207,8 @@ const CashIn = () => {
                         <div className="mt-0">
                             <h3 className="text-lg font-semibold text-emerald-400">Sender Information</h3>
                             <div className="mt-2 space-y-2">
-                                <p className="text-base font-medium"><strong>Agent Name:</strong> {isVerified?.agent_name || 'Not Found'}</p>
-                                <p className="text-sm text-gray-300"><strong>Agent Phone:</strong> {isVerified?.agent_phone_number || 'Not Found'}</p>
+                                <p className="text-base font-medium"><strong>Agent Name:</strong> {isVerified?.sender_name || 'Not Found'}</p>
+                                <p className="text-sm text-gray-300"><strong>Agent Phone:</strong> {isVerified?.sender_phone_number || 'Not Found'}</p>
                             </div>
                             <hr className="my-2 border-gray-600" />
                         </div>
@@ -217,8 +217,8 @@ const CashIn = () => {
                         <div className="mt-0">
                             <h3 className="text-lg font-semibold text-emerald-400">Receiver Information</h3>
                             <div className="mt-2 space-y-2">
-                                <p className="text-base font-medium"><strong>Receiver Name:</strong> {isVerified?.user_name || 'Not Found'}</p>
-                                <p className="text-sm text-gray-300"><strong>Receiver Phone:</strong> {isVerified?.user_phone_number || 'Not Found'}</p>
+                                <p className="text-base font-medium"><strong>Receiver Name:</strong> {isVerified?.receiver_name || 'Not Found'}</p>
+                                <p className="text-sm text-gray-300"><strong>Receiver Phone:</strong> {isVerified?.receiver_phone_number || 'Not Found'}</p>
                             </div>
                             <hr className="my-2 border-gray-600" />
                         </div>
