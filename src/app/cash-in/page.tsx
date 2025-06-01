@@ -32,7 +32,7 @@ interface VerifyObj {
     amount: number;
 }
 interface ApiErrorResponse {
-    message?: string;
+    error?: string;
 }
 // Cah In Page
 const CashIn = () => {
@@ -59,15 +59,14 @@ const CashIn = () => {
         cashIn.sender_name = user?.name;
         cashIn.sender_phone_number = user?.phone_number;
         // Verify cash In
-        const res = await verifyCashIn.mutateAsync(cashIn);
         try {
-
+            const res = await verifyCashIn.mutateAsync(cashIn);
             if (res?.verifiedTransaction) {
                 setIsVerified(res.verifiedTransaction);
             }
         } catch (error) {
             const axiosError = error as AxiosError<ApiErrorResponse>;
-            const existedError = axiosError?.response?.data?.message;
+            const existedError = axiosError?.response?.data?.error;
             if (existedError) {
                 toast.error(existedError)
             }

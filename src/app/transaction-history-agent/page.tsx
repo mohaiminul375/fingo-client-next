@@ -14,7 +14,7 @@ const UserTrxHistory = () => {
     if (isError) {
         return <p>Error: {(error as Error)?.message || "Something went wrong!"}</p>;
     }
-    if (user?.userType !== 'Agent' && user?.account_status !== 'Active') {
+    if (user?.accountType !== 'Agent' && user?.status !== 'Active') {
         return logOut();
     }
     return (
