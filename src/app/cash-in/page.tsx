@@ -32,7 +32,7 @@ interface VerifyObj {
     amount: number;
 }
 interface ApiErrorResponse {
-    error?: string;
+    message?: string;
 }
 // Cah In Page
 const CashIn = () => {
@@ -66,7 +66,7 @@ const CashIn = () => {
             }
         } catch (error) {
             const axiosError = error as AxiosError<ApiErrorResponse>;
-            const existedError = axiosError?.response?.data?.error;
+            const existedError = axiosError?.response?.data?.message;
             if (existedError) {
                 toast.error(existedError)
             }

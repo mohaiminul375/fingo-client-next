@@ -41,15 +41,20 @@ const UserTrxHistory = () => {
                         <div>
                             <p className="text-xs mb-1">TrxID: {trx.TrxID}</p>
                             <p className="text-sm">{new Date(trx.createdAt).toLocaleString()}</p>
-                            <p className="font-semibold">{trx.method}</p>
+                            <p className="font-semibold">{trx.method=='Agent_cashIn' &&'cash-In'}</p>
                             {
                                 trx.method === 'New_user_bonus' && <p>{trx.sender_name} ({trx.sender_phone_number})</p>
                             }
-                            <p className="text-sm">{trx.sender_name || trx.user_name} ({trx.user_phone_number || trx.sender_phone_number})</p>
+                            <p className="text-sm">{trx.sender_name} {trx.sender_phone_number}</p>
                         </div>
+                        <div>
+
                         <p className={`font-semibold ${["Agent_cash_in", "New_user_bonus_receive"].includes(trx.method) ? "text-green-400" : "text-red-400"}`}>
                             {["user_received_money", "Agent_cash_in", "New_user_bonus_receive"].includes(trx.method) ? "+" : "-"} {trx.amount} Taka
                         </p>
+                        <p>income: {trx.agent_income}</p>
+                        <p>Charge:{trx.charge}</p>
+                        </div>
                     </div>
                 ))}
             </div>

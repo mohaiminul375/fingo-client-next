@@ -14,7 +14,7 @@ const UserTrxHistory = () => {
     if (isError) {
         return <p>Error: {(error as Error)?.message || "Something went wrong!"}</p>;
     }
-    if (user?.userType !== 'User' && user?.userType !== "Active") {
+    if (user?.accountType !== 'User' && user?.status !== "Active") {
         return logOut();
     }
     return (
@@ -41,7 +41,7 @@ const UserTrxHistory = () => {
                         <div>
                             <p className="text-xs mb-1">TrxID: {trx.TrxID}</p>
                             <p className="text-sm">{new Date(trx.createdAt).toLocaleString()}</p>
-                            <p className="font-semibold">{trx.method}</p>
+                            <p className="font-semibold">{trx.method === 'User_cashIn' && 'Cash-In'}</p>
                             {
                                 trx.method === 'user_send_money' && <p>{trx.receiver_name} ({trx.receiver_phone_number})</p>
                             }
@@ -59,9 +59,13 @@ const UserTrxHistory = () => {
                             }
 
                         </div>
-                        <p className={`font-semibold ${["user_received_money", "Agent_cash_in", "New_user_bonus_receive"].includes(trx.method) ? "text-green-400" : "text-red-400"}`}>
-                            {["user_received_money", "Agent_cash_in", "New_user_bonus_receive"].includes(trx.method) ? "+" : "-"} {trx.amount} Taka
-                        </p>
+                        <div>
+                            <p className={`font-semibold ${["user_received_money", "Agent_cash_in", "New_user_bonus_receive"].includes(trx.method) ? "text-red-400" : " text-green-400"}`}>
+
+                                {["user_received_money", "Agent_cash_in", "New_user_bonus_receive"].includes(trx.method) ? "-" : "+"} {trx.amount} Taka
+                            </p>
+                            <p>Charge: {trx.charge}</p>
+                        </div>
 
 
                     </div>

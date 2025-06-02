@@ -21,7 +21,7 @@ const UserMenu = () => {
                 </Link>
 
                 {/* TRx history */}
-                <Link href='/cash-out' className='flex flex-col justify-center items-center'>
+                <Link href='/transaction-history-user' className='flex flex-col justify-center items-center'>
                     <Image src={trx_history} alt='send-money' height={30} width={30} />
                     <h2 className='text-base font-semibold text-center'>Transaction <br />
                         History

@@ -13,6 +13,7 @@ interface TrxProp {
     agent_phone_number: string;
     phone_number: string;
     amount: number;
+    charge:number;
 }
 interface queryProps {
     phone_number: string;
@@ -20,7 +21,7 @@ interface queryProps {
 export const useGetUserTrx = ({ phone_number }: queryProps) => {
     const { data, isPending, isError, error } = useQuery<TrxProp[]>({
         queryFn: async () => {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL2}/all-transactions-user/${phone_number}`)
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/transaction-history/user-transactions/${phone_number}`)
             return data;
         },
         queryKey: ['all-user-trx']
