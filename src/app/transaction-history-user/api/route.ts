@@ -13,7 +13,7 @@ interface TrxProp {
     agent_phone_number: string;
     phone_number: string;
     amount: number;
-    charge:number;
+    charge:number;  
 }
 interface queryProps {
     phone_number: string;

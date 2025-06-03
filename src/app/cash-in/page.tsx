@@ -46,6 +46,7 @@ const CashIn = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors, isValid },
     } = useForm<Inputs>({
         mode: "onChange",
@@ -65,6 +66,7 @@ const CashIn = () => {
                 setIsVerified(res.verifiedTransaction);
             }
         } catch (error) {
+            console.log(error);
             const axiosError = error as AxiosError<ApiErrorResponse>;
             const existedError = axiosError?.response?.data?.message;
             if (existedError) {
@@ -91,6 +93,7 @@ const CashIn = () => {
             const res = await completeCashIn.mutateAsync(isVerified);
             if (res?.success == true) {
                 toast.success(res?.message)
+                reset()
             }
         } catch (error) {
             const axiosError = error as AxiosError<ApiErrorResponse>;
@@ -228,6 +231,7 @@ const CashIn = () => {
                             <div className="mt-2 space-y-2">
                                 <p className="text-base font-medium"><strong>Amount:</strong> {isVerified?.amount || 'Not Found'} Taka</p>
                                 <p className="text-sm text-gray-300"><strong>Charge:</strong> 0 Taka</p>
+                                <p className="text-sm text-gray-300"><strong>income:</strong> {isVerified.amount * 0.01} Taka</p>
                                 <p className="text-base font-medium">
                                     <strong>Remain Balance: </strong>
                                     {user?.current_balance !== undefined

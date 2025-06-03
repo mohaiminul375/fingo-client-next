@@ -30,10 +30,10 @@ interface VerifyObj {
     receiver_name: string;
     receiver_phone_number: string;
     amount: number;
-    trx_charge: number;
+    charge: number;
 }
 interface ApiErrorResponse {
-    error: string;
+    message: string;
 }
 
 // Send Money Page
@@ -41,7 +41,7 @@ const SendMoney = () => {
     const [isLoading, setIsLoading] = useState(false);
     const verifySendMoney = useVerifySendMoney();
     const completeSendMoney = useCompleteSendMoney();
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [isVerified, setIsVerified] = useState<VerifyObj | null>(null);
     const [btnDisabled, setBtnDisabled] = useState<boolean>(false)
@@ -79,7 +79,7 @@ const SendMoney = () => {
             }
         } catch (error) {
             const axiosError = error as AxiosError<ApiErrorResponse>;
-            const existedError = axiosError?.response?.data?.error;
+            const existedError = axiosError?.response?.data?.message;
             if (existedError) {
                 toast.error(existedError)
             }
@@ -110,7 +110,7 @@ const SendMoney = () => {
             }
         } catch (error) {
             const axiosError = error as AxiosError<ApiErrorResponse>;
-            const existedError = axiosError?.response?.data?.error;
+            const existedError = axiosError?.response?.data?.message;
             if (existedError) {
                 toast.error(existedError)
             }
@@ -120,7 +120,7 @@ const SendMoney = () => {
         }
 
     };
-    if (user?.userType !== 'User' && user?.account_status !== "Active") {
+    if (user?.accountType !== 'User' && user?.status !== "Active") {
         return logOut();
     }
     return (
@@ -243,11 +243,11 @@ const SendMoney = () => {
                             <h3 className="text-lg font-semibold text-emerald-400">Amount Information</h3>
                             <div className="mt-2 space-y-2">
                                 <p className="text-base font-medium"><strong>Amount:</strong> {isVerified?.amount || 'Not Found'} Taka</p>
-                                <p className="text-sm text-gray-300"><strong>Charge:</strong> {isVerified?.trx_charge || 0} Taka</p>
+                                <p className="text-sm text-gray-300"><strong>Charge:</strong> {isVerified?.charge || 0} Taka</p>
                                 <p className="text-base font-medium">
                                     <strong>Remain Balance: </strong>
                                     {user?.current_balance !== undefined
-                                        ? user.current_balance - isVerified.amount - isVerified.trx_charge
+                                        ? user.current_balance - isVerified.amount - isVerified.charge
                                         : 'Not Found'} Taka
                                 </p>
 
