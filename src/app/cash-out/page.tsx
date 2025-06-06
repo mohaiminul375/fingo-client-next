@@ -17,20 +17,20 @@ import { AxiosError } from 'axios';
 
 type Inputs = {
     name: string;
-    agent_phone_number: string;
+    receiver_phone_number: string;
     PIN: string;
     trx_amount: number;
-    user_name: string | undefined;
-    user_phone_number: string | undefined;
+    sender_name: string | undefined;
+    sender_phone_number: string | undefined;
     method: string;
 }
 interface VerifyObj {
-    user_name: string;
-    user_phone_number: string;
-    agent_name: string;
-    agent_phone_number: string;
+    sender_name: string;
+    sender_phone_number: string;
+    receiver_name: string;
+    receiver_phone_number: string;
     amount: number;
-    trx_charge: number;
+    charge: number;
 }
 interface ApiErrorResponse {
     message: string;
@@ -66,8 +66,8 @@ const CashOut = () => {
         }
 
         cashOut.method = 'cashOut';
-        cashOut.user_name = user?.name;
-        cashOut.user_phone_number = user?.phone_number;
+        cashOut.sender_name = user?.name;
+        cashOut.sender_phone_number = user?.phone_number;
         // Verify cash out
         try {
             const res = await verifySendMoney.mutateAsync(cashOut);
@@ -85,7 +85,7 @@ const CashOut = () => {
             toast.error(netWorkError)
         }
     };
-    if (user?.userType !== 'Agent' && user?.account_status !== 'Active') {
+    if (user?.accountType !== 'Agent' && user?.status !== 'Active') {
         return logOut();
     }
     // Handle button animation and complete cash out
@@ -134,7 +134,7 @@ const CashOut = () => {
                             <div className="grid w-full items-center gap-1.5">
                                 <Label>Authorized Agent Phone Number <span className='text-red-700 font-bold'>*</span></Label>
                                 <Input type="tel" placeholder="Enter agent phone number"
-                                    {...register("agent_phone_number", {
+                                    {...register("receiver_phone_number", {
                                         required: "Phone number is required",
                                         pattern: {
                                             value: /^[0-9]+$/,
@@ -144,7 +144,7 @@ const CashOut = () => {
                                         maxLength: { value: 11, message: "Phone number must be 11 characters" }
                                     })}
                                 />
-                                {errors.agent_phone_number && <p className="text-red-500">{errors.agent_phone_number.message}</p>}
+                                {errors.receiver_phone_number && <p className="text-red-500">{errors.receiver_phone_number.message}</p>}
                             </div>
 
                             {/* Amount */}
@@ -216,8 +216,8 @@ const CashOut = () => {
                         <div className="mt-0">
                             <h3 className="text-lg font-semibold text-emerald-400">Sender Information</h3>
                             <div className="mt-2 space-y-2">
-                                <p className="text-base font-medium"><strong>Sender Name:</strong> {isVerified?.user_name || 'Not Found'}</p>
-                                <p className="text-sm text-gray-300"><strong>Sender Number:</strong> {isVerified?.user_phone_number || 'Not Found'}</p>
+                                <p className="text-base font-medium"><strong>Sender Name:</strong> {isVerified?.sender_name || 'Not Found'}</p>
+                                <p className="text-sm text-gray-300"><strong>Sender Number:</strong> {isVerified?.sender_phone_number || 'Not Found'}</p>
                             </div>
                             <hr className="my-2 border-gray-600" />
                         </div>
@@ -226,8 +226,8 @@ const CashOut = () => {
                         <div className="mt-0">
                             <h3 className="text-lg font-semibold text-emerald-400">Receiver Information</h3>
                             <div className="mt-2 space-y-2">
-                                <p className="text-base font-medium"><strong>Agent Name:</strong> {isVerified?.agent_name || 'Not Found'}</p>
-                                <p className="text-sm text-gray-300"><strong>Receiver Phone:</strong> {isVerified?.agent_phone_number || 'Not Found'}</p>
+                                <p className="text-base font-medium"><strong>Agent Name:</strong> {isVerified?.receiver_name || 'Not Found'}</p>
+                                <p className="text-sm text-gray-300"><strong>Receiver Phone:</strong> {isVerified?.receiver_phone_number || 'Not Found'}</p>
                             </div>
                             <hr className="my-2 border-gray-600" />
                         </div>
@@ -237,11 +237,11 @@ const CashOut = () => {
                             <h3 className="text-lg font-semibold text-emerald-400">Amount Information</h3>
                             <div className="mt-2 space-y-2">
                                 <p className="text-base font-medium"><strong>Amount:</strong> {isVerified?.amount || 'Not Found'} Taka</p>
-                                <p className="text-sm text-gray-300"><strong>Charge:</strong> {isVerified?.trx_charge || 0} Taka</p>
+                                <p className="text-sm text-gray-300"><strong>Charge:</strong> {isVerified?.charge || 0} Taka</p>
                                 <p className="text-base font-medium">
                                     <strong>Remain Balance: </strong>
                                     {user?.current_balance !== undefined
-                                        ? user.current_balance - isVerified.amount - isVerified.trx_charge
+                                        ? user.current_balance - isVerified.amount - isVerified.charge
                                         : 'Not Found'} Taka
                                 </p>
                             </div>
