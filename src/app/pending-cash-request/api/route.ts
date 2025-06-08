@@ -9,13 +9,13 @@ interface CashReq {
     request_amount: number,
     status: string,
     account_status: string;
-    requestedAt: string;
+    createdAt: string;
 }
 // Pending cash request list send from agent
 export const usePendingCashReq = () => {
     const { data, isPending, isError, error } = useQuery<CashReq[]>({
         queryFn: async () => {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL2}/all-cashRequest-agent`)
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/request-money-agent/all-request`)
             return data;
         },
         queryKey: ['all-withdraw-request']

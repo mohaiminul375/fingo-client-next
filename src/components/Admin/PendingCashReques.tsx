@@ -11,7 +11,7 @@ interface User {
     request_amount: number,
     status: string,
     account_status: string;
-    requestedAt: string;
+    createdAt: string;
 }
 interface TableProps {
     idx: number;
@@ -20,12 +20,12 @@ interface TableProps {
 // Table of pending cash request admin page
 const CashRequestTable = ({ agent, idx }: TableProps) => {
     const approveReq = useApproveCashReq();
-    const { _id, agent_name, agent_phone_number, request_amount, status, requestedAt } = agent;
+    const { _id, agent_name, agent_phone_number, request_amount, status, createdAt } = agent;
     // const date =new Date(createdAt).tol;
     // handle cash request approved
     const handleCashRequestApprove = () => {
         const newReq = {
-            _id, agent_name, agent_phone_number, request_amount, status, requestedAt
+            _id, agent_name, agent_phone_number, request_amount, status, createdAt
         }
         Swal.fire({
             title: "Are you sure?",
@@ -53,7 +53,7 @@ const CashRequestTable = ({ agent, idx }: TableProps) => {
                 {status}
             </TableCell>
             <TableCell>
-                {new Date(requestedAt).toLocaleString()}
+                {new Date(createdAt).toLocaleString()}
             </TableCell>
             <TableCell>
                 {request_amount}

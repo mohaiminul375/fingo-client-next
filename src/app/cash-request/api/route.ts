@@ -7,14 +7,14 @@ interface ApiErrorResponse {
 }
 interface ReqProp {
     agent_name: string | undefined;
-    agent_number: string | undefined;
+    agent_phone_number: string | undefined;
 }
 // Send Cash request to Admin from agent
 export const useAgentCashRequest = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (newReq: ReqProp) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL2}/request-money-agent`, newReq)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/request-money-agent/request`, newReq)
             return data
         },
         mutationKey: ['cash-request-user'],

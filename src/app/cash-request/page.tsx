@@ -26,7 +26,7 @@ const CashReq = () => {
             if (result.isConfirmed) {
                 const newReq = {
                     agent_name: user?.name,
-                    agent_number: user?.phone_number
+                    agent_phone_number: user?.phone_number
                 }
                 await cashRequest.mutateAsync(newReq)
 
