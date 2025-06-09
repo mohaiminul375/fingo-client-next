@@ -2,8 +2,8 @@ import React from 'react';
 import { TableCell, TableRow } from '../ui/table';
 import { Button } from '../ui/button';
 import Swal from 'sweetalert2';
-import { useApproveCashReq } from '@/app/pending-withdraw-request/api/route';
-// import { useApproveCashReq } from '@/app/pending-cash-request/api/route';
+import { useApproveCashReq } from '@/app/pending-cash-request/api/route';
+
 interface User {
     _id: string,
     agent_name: string,

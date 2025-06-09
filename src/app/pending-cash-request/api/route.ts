@@ -18,16 +18,17 @@ export const usePendingCashReq = () => {
             const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/request-money-agent/all-request`)
             return data;
         },
-        queryKey: ['all-withdraw-request']
+        queryKey: ['all-pending-cash-request']
     })
     return { data, isPending, isError, error }
 }
 // approve cash Request
-export const useApproveWithdraw = () => {
+
+export const useApproveCashReq = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: async (cash_Req: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL2}/approve-withdraw-cashRequest`, cash_Req)
+        mutationFn: async (approve_req: object) => {
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/request-money-agent/approve-request`, approve_req)
             return data
         },
         mutationKey: ['approve-cash-request'],
@@ -38,7 +39,7 @@ export const useApproveWithdraw = () => {
                     text: "Approved successfully",
                     icon: "success"
                 });
-                queryClient.invalidateQueries({ queryKey: ['all-withdraw-request'] })
+                queryClient.invalidateQueries({ queryKey: ['all-pending-cash-request'] })
             }
         }, onError: () => {
             toast.error('failed approved')
