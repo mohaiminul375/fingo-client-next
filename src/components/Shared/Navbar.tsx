@@ -51,7 +51,7 @@ export default function Navbar() {
                             <div className={`flex flex-col ml-3 transition-all duration-300 ${showBalance ? "opacity-100" : "opacity-0 w-0 overflow-hidden"}`}>
                                 <span className="text-lg font-medium">৳ {user.current_balance} </span>
                                 {
-                                    user?.userType !== 'User' && <span className="text-sm text-gray-600">Income: {user?.total_income} ৳</span>
+                                    user?.accountType !== 'User' && <span className="text-sm text-gray-600">Income: {user?.total_income} ৳</span>
                                 }
 
                             </div>

@@ -19,7 +19,7 @@ const WithdrawReq = () => {
         const withdrawAmount = parseFloat(amount);
         if (withdrawAmount <= 99) {
             return toast.error('Amount must me 100 or more')
-        } else if ((user?.current_balance ?? 0) < withdrawAmount) {
+        } else if ((user?.total_income ?? 0) < withdrawAmount) {
             return toast.error('Insufficient Balance');
         }
         console.log({ withdrawAmount })
@@ -43,7 +43,7 @@ const WithdrawReq = () => {
             }
         });
     }
-    if (user?.userType !== 'Agent' && user?.account_status !== 'Active') {
+    if (user?.accountType !== 'Agent' && user?.status !== 'Active') {
         return logOut();
     }
     return (
