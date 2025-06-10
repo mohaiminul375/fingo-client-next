@@ -18,7 +18,7 @@ export const usePendingCashReq = () => {
             const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/request-withdraw-agent/all-request`)
             return data;
         },
-        queryKey: ['all-pending-cash-request']
+        queryKey: ['all-withdraw-request']
     })
     return { data, isPending, isError, error }
 }
@@ -26,8 +26,8 @@ export const usePendingCashReq = () => {
 export const useApproveWithdraw = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: async (cash_Req: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/approve-withdraw-cashRequest`, cash_Req)
+        mutationFn: async (approve_Req: object) => {
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/request-withdraw-agent/approve-request`, approve_Req)
             return data
         },
         mutationKey: ['approve-cash-request'],
