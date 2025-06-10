@@ -9,7 +9,7 @@ const UserMenu = () => {
     return (
         <section className='md:max-w-2xl mx-auto'>
             <div className='flex items-center justify-around gap-0'>
-                <Link href='/send-money' className='flex flex-col justify-center items-center border-popover-foreground rounded-md border-2 p-3'>
+                <Link href='/send-money' className='flex flex-col justify-center items-center border-popover-foreground rounded-md border-2 p-3 '>
                     <Image src={send_money} alt='send-money' height={40} width={40} />
                     <h2 className='text-base font-semibold'>Send Money</h2>
                 </Link>
