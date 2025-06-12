@@ -48,6 +48,9 @@ const WithdrawReq = () => {
     }
     return (
         <section className='md:max-w-3xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-8 py-8'>
+            <head>
+                <title>Fingo | Withdraw Request</title>
+            </head>
             <div className='space-y-5'>
                 <WebLogo />
                 <h2 className='text-center text-3xl font-bold'>Withdraw Request</h2>

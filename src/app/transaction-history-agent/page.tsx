@@ -19,6 +19,9 @@ const UserTrxHistory = () => {
     }
     return (
         <section className="border-2  md:max-w-xl mx-auto bg-popover-foreground md:p-5 md:rounded-md text-white">
+            <head>
+                <title>Fingo | Transaction History</title>
+            </head>
             {/* Heading */}
             <div>
                 <h2 className="text-center text-2xl font-bold">Transaction History</h2>

@@ -104,6 +104,9 @@ const Register = () => {
     return (
         <section className='md:max-w-5xl mx-auto border-2 border-popover-foreground bg-popover-foreground text-white rounded-md p-5 py-8'>
             {/* Heading */}
+            <head>
+                <title>Fingo | Register</title>
+            </head>
             <div className='space-y-5'>
                 <div className='flex items-center justify-center'>
                     <Image src={logo} alt="site_logo" height={50} width={50} className="rounded-full" />

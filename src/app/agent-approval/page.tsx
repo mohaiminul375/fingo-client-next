@@ -22,6 +22,9 @@ const AgentApproval = () => {
     }
     return (
         <section className="">
+            <head>
+                <title>Fingo | Agent Approval</title>
+            </head>
             {/* Heading */}
             <div className="max-w-xl mx-auto text-center bg-popover-foreground text-white py-2 rounded-md">
                 <WebLogo />

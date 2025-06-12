@@ -21,6 +21,9 @@ const PendingCashReq = () => {
     }
     return (
         <section className="">
+            <head>
+                <title>Fingo | Manage Cash Request</title>
+            </head>
             {/* Heading */}
             <div className="max-w-xl mx-auto text-center bg-popover-foreground text-white py-2 rounded-md">
                 <WebLogo />
