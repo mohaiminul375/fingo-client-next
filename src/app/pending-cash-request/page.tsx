@@ -28,7 +28,7 @@ const PendingCashReq = () => {
             <div className="max-w-xl mx-auto text-center bg-popover-foreground text-white py-2 rounded-md">
                 <WebLogo />
                 <h2 className="text-xl md:text-3xl font-bold leading-tight mb-4">
-                    Welcome to Agent`&#39;`s Cash Request
+                    Welcome to Agent&#39;s Cash Request
                 </h2>
                 <p className="text-lg mb-6">
                     Agent`&#39;`s Are waiting for approval for stars new transaction
