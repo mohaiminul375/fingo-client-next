@@ -65,9 +65,9 @@ export default function Navbar() {
                                 </Avatar>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="">
-                                <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
-                                <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
-                                <DropdownMenuLabel onClick={logOut}>LogOut</DropdownMenuLabel>
+                                <DropdownMenuLabel className="dark:text-white">{user?.name}</DropdownMenuLabel>
+                                <DropdownMenuLabel className="dark:text-white">{user.email}</DropdownMenuLabel>
+                                <DropdownMenuLabel className="dark:text-white" onClick={logOut}>LogOut</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                             </DropdownMenuContent>
                         </DropdownMenu>
