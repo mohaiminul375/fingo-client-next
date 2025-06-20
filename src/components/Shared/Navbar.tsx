@@ -18,7 +18,7 @@ export default function Navbar() {
     const { setTheme } = useTheme()
     console.log(user, loading);
     const currentTheme = localStorage.getItem('theme')
-    if (!currentTheme) return setTheme('system')
+    if (!currentTheme){  setTheme('system')}
     return (
         <header className="flex h-20 w-full items-center px-4 md:px-6 shadow-xl border-b-2 bg-popover-foreground ">
             <Link href="/" className="flex items-center">
@@ -42,14 +42,14 @@ export default function Navbar() {
                         >
                             {/* Taka symbol and Check Balance (Initially Visible) */}
                             <span
-                                className={`text-sm font-medium transition-all duration-300 ${showBalance ? "opacity-0 w-0 overflow-hidden" : "opacity-100"}`}
+                                className={`text-sm font-medium transition-all dark:text-black duration-300 ${showBalance ? "opacity-0 w-0 overflow-hidden" : "opacity-100"}`}
                             >
                                 ৳ Check Balance
                             </span>
 
                             {/* Balance and Income (Initially Hidden, Shown on Click) and user Type validate*/}
-                            <div className={`flex flex-col ml-3 transition-all duration-300 ${showBalance ? "opacity-100" : "opacity-0 w-0 overflow-hidden"}`}>
-                                <span className="text-lg font-medium">৳ {user.current_balance} </span>
+                            <div className={`flex flex-col ml-3 transition-all duration-300 dark:text-black ${showBalance ? "opacity-100" : "opacity-0 w-0 overflow-hidden"}`}>
+                                <span className="text-lg dark:text-black  font-medium">৳ {user.current_balance} </span>
                                 {
                                     user?.accountType !== 'User' && <span className="text-sm text-gray-600">Income: {user?.total_income} ৳</span>
                                 }

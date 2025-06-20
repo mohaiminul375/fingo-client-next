@@ -13,7 +13,7 @@ body {
 @layer base {
   :root {
 
-    --background: 0,0,80%;
+    --background: 0, 0, 80%;
 
     --foreground: 0, 0%, 0%;
     /*#003e78 dark shade of blue*/
@@ -84,7 +84,7 @@ body {
 
     --primary: 210 40% 98%;
 
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary-foreground: 216, 31%, 17%;
 
     --secondary: 217.2 32.6% 17.5%;
 

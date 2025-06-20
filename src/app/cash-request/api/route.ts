@@ -14,7 +14,7 @@ export const useAgentCashRequest = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (newReq: ReqProp) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/request-money-agent/request`, newReq)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/request-money-agent/request`, newReq)
             return data
         },
         mutationKey: ['cash-request-user'],

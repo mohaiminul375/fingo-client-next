@@ -4,7 +4,7 @@ import axios from "axios"
 export const useVerifyCashOut = () => {
     return useMutation({
         mutationFn: async (cashOut_Verify: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/cashOut/verify-cashOut`, cashOut_Verify)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/cashOut/verify-cashOut`, cashOut_Verify)
             return data
         },
         mutationKey: ['verify-sendMoney'],
@@ -15,7 +15,7 @@ export const useVerifyCashOut = () => {
 export const useCompleteCashOut = () => {
     return useMutation({
         mutationFn: async (cashIn_complete: object) => {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_LOCAL}/cashOut/complete-cashOut`, cashIn_complete)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/cashOut/complete-cashOut`, cashIn_complete)
             return data
         },
         mutationKey: ['complete-SendMoney'],
